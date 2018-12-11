@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controller.MainActivity">
 
-    <TextView
+    <View
+        android:id="@+id/activity_main_background_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_sage"/>
+
+    <ImageView
+        android:id="@+id/activity_main_smiley"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/smiley_happy"/>
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/activity_main_note_add"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="450dp"
+        android:layout_marginStart="10dp"
+        app:srcCompat="@drawable/ic_note_add_black" />
+
+    <ImageView
+        android:id="@+id/activity_main_history"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/ic_history_black" />
+
+</FrameLayout>
