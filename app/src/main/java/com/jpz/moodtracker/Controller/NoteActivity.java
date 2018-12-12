@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.jpz.moodtracker.R;
 
-public class HistoricActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historic);
+        setContentView(R.layout.activity_note);
     }
 }

@@ -20,22 +20,22 @@
         android:layout_gravity="center"
         app:srcCompat="@drawable/smiley_happy"/>
 
-    <ImageView
+    <Button
         android:id="@+id/activity_main_note_add"
-        android:layout_width="40dp"
+        android:layout_width="35dp"
         android:layout_height="40dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="450dp"
+        android:layout_gravity="bottom|start"
         android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/ic_note_add_black" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_note_add_black" />
 
-    <ImageView
+    <Button
         android:id="@+id/activity_main_history"
-        android:layout_width="40dp"
+        android:layout_width="45dp"
         android:layout_height="40dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="450dp"
+        android:layout_gravity="bottom|end"
         android:layout_marginEnd="10dp"
-        app:srcCompat="@drawable/ic_history_black" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_history_black" />
 
 </FrameLayout>
