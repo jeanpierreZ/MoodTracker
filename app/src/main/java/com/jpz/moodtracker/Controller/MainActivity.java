@@ -2,6 +2,7 @@ package com.jpz.moodtracker.Controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.jpz.moodtracker.R;
 
@@ -21,8 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private Button mconsultHistory;
     private Button maddNote;
 
+    private SharedPreferences mPreferences;
+
+    public static final String BUNDLE_STATE_NOTE = "BUNDLE_STATE_NOTE";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -58,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 note.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        mPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                        String saveNote = input.getText().toString();
+                        mPreferences.edit().putString(BUNDLE_STATE_NOTE, saveNote).apply();
                         dialog.dismiss();
-
-                        //a toast to control if the string in the EditText is OK before to save it
-                        Toast.makeText(getApplicationContext(), input.getText(), Toast.LENGTH_LONG).show();
                     }
                 });
+
                 note.setNegativeButton("ANNULER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
