@@ -7,18 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".Controller.MainActivity">
 
-    <View
-        android:id="@+id/activity_main_background_color"
+    <FrameLayout
+        android:id="@+id/activity_main_happy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_sage"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/smiley_happy"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_main_superHappy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_sage"/>
+        android:visibility="invisible">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/banana_yellow"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/smiley_super_happy"/>
+    </FrameLayout>
 
-    <ImageView
-        android:id="@+id/activity_main_smiley"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/smiley_happy"/>
+    <FrameLayout
+        android:id="@+id/activity_main_normal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cornflower_blue_65"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/smiley_normal"/>
+    </FrameLayout>
 
     <Button
         android:id="@+id/activity_main_note_add"
