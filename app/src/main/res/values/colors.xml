@@ -11,4 +11,12 @@
     <color name="light_sage">#ffb8e986</color>
     <color name="banana_yellow">#fff9ec4f</color>
 
+    <array name="backGroundColors">
+        <item>#ffde3c50</item>
+        <item>#ff9b9b9b</item>
+        <item>#a5468ad9</item>
+        <item>#ffb8e986</item>
+        <item>#fff9ec4f</item>
+    </array>
+
 </resources>

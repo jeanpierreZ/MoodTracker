@@ -1,4 +1,4 @@
-package com.jpz.moodtracker.Controller;
+package com.jpz.moodtracker.Controllers.Activities;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ public class HistoricActivity extends AppCompatActivity {
 
     private TextView mComment;
     private String mNote;
-    private SharedPreferences mPref;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,9 @@ public class HistoricActivity extends AppCompatActivity {
 
         mComment = (TextView) findViewById(R.id.activity_historic_comment);
 
-        mPref = getSharedPreferences("test", MODE_PRIVATE);
+        mPreferences = getSharedPreferences("test", MODE_PRIVATE);
 
-        mNote = mPref.getString(MainActivity.BUNDLE_STATE_NOTE,null);
+        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
 
         printComment();
     }

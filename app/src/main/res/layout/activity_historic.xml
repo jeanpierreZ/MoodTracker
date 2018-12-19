@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Controller.HistoricActivity">
+    tools:context=".Controllers.Activities.HistoricActivity">
 
     <TextView
         android:id="@+id/activity_historic_comment"
