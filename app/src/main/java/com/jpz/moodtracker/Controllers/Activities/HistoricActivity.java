@@ -54,12 +54,10 @@ public class HistoricActivity extends AppCompatActivity {
     }
 
     private void printComment() {
-        String printTheText = mNote;
-        mComment.setText(printTheText);
+        mComment.setText(mNote);
     }
 
     private void printDate() {
-        //String printTheDate = msaveDate;
         mDate.setText(msaveDate);
         mYesterday.setText(hier);
     }
