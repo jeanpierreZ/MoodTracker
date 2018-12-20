@@ -13,4 +13,44 @@
         android:layout_height="wrap_content"
         android:text="Display Comment"/>
 
+    <TextView
+        android:id="@+id/activity_historic_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display date"/>
+
+    <TextView
+        android:id="@+id/activity_historic_yesterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Yesterday"/>
+
+    <TextView
+        android:id="@+id/activity_historic_j-4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="d-4"/>
+
+    <TextView
+        android:id="@+id/activity_historic_j-5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="d-5"/>
+
+    <TextView
+        android:id="@+id/activity_historic_j-6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="d-6"/>
+
+    <TextView
+        android:id="@+id/activity_historic_j-7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="d-7"/>
+
+
+
+
+
 </LinearLayout>

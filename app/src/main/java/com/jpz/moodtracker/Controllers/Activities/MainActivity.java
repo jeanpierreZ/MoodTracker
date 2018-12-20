@@ -15,6 +15,10 @@ import android.widget.LinearLayout;
 import com.jpz.moodtracker.Adapters.PageAdapter;
 import com.jpz.moodtracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mconsultHistory;
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPreferences;
 
     public static final String BUNDLE_STATE_NOTE = "BUNDLE_STATE_NOTE";
+
+    public static final String BUNDLE_STATE_DATE = "BUNDLE_STATE_DATE";
+
+    public static final String BUNDLE_STATE_YESTERDAY = "BUNDLE_STATE_YESTERDAY";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,9 +69,33 @@ public class MainActivity extends AppCompatActivity {
                 note.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        // Save the comment
                         mPreferences = getSharedPreferences("test", MODE_PRIVATE);
                         String saveNote = input.getText().toString();
                         mPreferences.edit().putString(BUNDLE_STATE_NOTE, saveNote).apply();
+
+                        // Save the date
+                        Calendar calendar = Calendar.getInstance();
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+
+                        String strDate = sdf.format(calendar.getTime());
+
+                        mPreferences = getSharedPreferences("date", MODE_PRIVATE);
+                        mPreferences.edit().putString(BUNDLE_STATE_DATE, strDate).apply();
+
+                        // yesterday
+
+                        Calendar yesterday = Calendar.getInstance();
+
+                        yesterday.add(Calendar.DAY_OF_WEEK, -1);
+
+                        String yesterdayDate = sdf.format(yesterday.getTime());
+
+                        mPreferences = getSharedPreferences("yesterday", MODE_PRIVATE);
+                        mPreferences.edit().putString(BUNDLE_STATE_YESTERDAY, yesterdayDate).apply();
+
                         dialog.dismiss();
                     }
                 });
