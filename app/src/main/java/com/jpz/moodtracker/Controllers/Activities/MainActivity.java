@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager pager = findViewById(R.id.activity_main_viewpager);
 
+        // Transform ViewPager to VerticalViewPager
+        // VerticalViewPager verticalPager = (VerticalViewPager) pager;
+
         pager.setAdapter(new PageAdapter(getSupportFragmentManager(),
                 getResources().getIntArray(R.array.backGroundColors),
                 getResources().getIntArray(R.array.smileys)){
