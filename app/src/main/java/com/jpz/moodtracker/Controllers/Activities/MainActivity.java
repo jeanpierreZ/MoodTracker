@@ -3,7 +3,6 @@ package com.jpz.moodtracker.Controllers.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -112,13 +111,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureViewPager() {
+        VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
 
-        ViewPager pager = findViewById(R.id.activity_main_viewpager);
-
-        // Transform ViewPager to VerticalViewPager
-        // VerticalViewPager verticalPager = (VerticalViewPager) pager;
-
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager(),
+        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager(),
                 getResources().getIntArray(R.array.backGroundColors),
                 getResources().getIntArray(R.array.smileys)){
         });
