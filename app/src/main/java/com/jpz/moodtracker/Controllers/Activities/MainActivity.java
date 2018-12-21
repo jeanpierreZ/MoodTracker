@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getIntArray(R.array.backGroundColors),
                 getResources().getIntArray(R.array.smileys)){
         });
+        verticalPager.setCurrentItem(3);
     }
 
 }

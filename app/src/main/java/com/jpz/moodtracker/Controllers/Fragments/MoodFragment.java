@@ -52,8 +52,8 @@ public class MoodFragment extends Fragment {
 
         // Get data from Bundle
 
-        int color = getArguments().getInt(KEY_BACKGROUND_COLOR, -1);
-        int smiley = getArguments().getInt(KEY_SMILEY, -1);
+        int color = getArguments().getInt(KEY_BACKGROUND_COLOR, 3);
+        int smiley = getArguments().getInt(KEY_SMILEY, 3);
 
         // Update widgets whit it
 
