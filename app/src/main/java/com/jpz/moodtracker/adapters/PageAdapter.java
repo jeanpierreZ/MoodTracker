@@ -1,10 +1,10 @@
-package com.jpz.moodtracker.Adapters;
+package com.jpz.moodtracker.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.jpz.moodtracker.Controllers.Fragments.MoodFragment;
+import com.jpz.moodtracker.controllers.fragments.MoodFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 

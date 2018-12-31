@@ -1,4 +1,4 @@
-package com.jpz.moodtracker.Controllers.Activities;
+package com.jpz.moodtracker.controllers.activities;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.jpz.moodtracker.Controllers.Activities;
+package com.jpz.moodtracker.view;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

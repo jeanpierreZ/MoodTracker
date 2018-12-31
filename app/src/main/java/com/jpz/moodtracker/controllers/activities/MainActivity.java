@@ -1,4 +1,4 @@
-package com.jpz.moodtracker.Controllers.Activities;
+package com.jpz.moodtracker.controllers.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.jpz.moodtracker.Adapters.PageAdapter;
+import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.R;
+import com.jpz.moodtracker.view.VerticalViewPager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
