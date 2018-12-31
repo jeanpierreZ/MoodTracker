@@ -8,13 +8,11 @@ import com.jpz.moodtracker.Controllers.Fragments.MoodFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-    private int[] color;
-    private int[] smiley;
+    private int[] mood;
 
-    public PageAdapter(FragmentManager mgr, int[] color, int[] smiley) {
+    public PageAdapter(FragmentManager mgr, int[] mood) {
         super(mgr);
-        this.color = color;
-        this.smiley = smiley;
+        this.mood = mood;
     }
 
     @Override
@@ -24,6 +22,6 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return (MoodFragment.newInstance(this.color[position], this.smiley[position]));
+        return (MoodFragment.newInstance(this.mood[position]));
     }
 }
