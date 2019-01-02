@@ -8,37 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="mood_sad">
-        <item name="android:textColor">#ffde3c50</item>
-        <item name="android:src">@drawable/smiley_sad</item>
-    </style>
-
-    <style name="mood_disappointed">
-        <item name="android:textColor">#ff9b9b9b</item>
-        <item name="android:src">@drawable/smiley_disappointed</item>
-    </style>
-
-    <style name="mood_normal">
-        <item name="android:textColor">#a5468ad9</item>
-        <item name="android:src">@drawable/smiley_normal</item>
-    </style>
-
-    <style name="mood_happy">
-        <item name="android:textColor">#ffb8e986</item>
-        <item name="android:src">@drawable/smiley_happy</item>
-    </style>
-
-    <style name="mood_super_happy">
-        <item name="android:textColor">#fff9ec4f</item>
-        <item name="android:src">@drawable/smiley_super_happy</item>
-    </style>
-
-    <array name="moods">
-        <item>"mood_sad"</item>
-        <item>"mood_disappointed</item>
-        <item>"mood_normal</item>
-        <item>"mood_happy</item>
-        <item>"mood_super_happy</item>
-    </array>
-
 </resources>
