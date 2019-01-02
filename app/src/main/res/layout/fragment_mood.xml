@@ -6,13 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_sage"
     tools:context=".controllers.fragments.MoodFragment">
-
-    <ImageView
-        android:id="@+id/fragment_mood_color"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_sage"/>
 
     <ImageView
         android:id="@+id/fragment_mood_smiley"
