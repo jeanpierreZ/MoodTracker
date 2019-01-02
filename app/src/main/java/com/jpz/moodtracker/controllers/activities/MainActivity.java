@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.R;
+import com.jpz.moodtracker.controllers.fragments.MoodFragment;
 import com.jpz.moodtracker.view.VerticalViewPager;
 
 import java.text.SimpleDateFormat;
@@ -114,10 +115,9 @@ public class MainActivity extends AppCompatActivity {
     private void configureViewPager() {
         VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
 
-        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager(),
-                getResources().getIntArray(R.array.backGroundColors),
-                getResources().getIntArray(R.array.smileys)){
-        });
+        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()
+        ));
+
         verticalPager.setCurrentItem(3);
     }
 

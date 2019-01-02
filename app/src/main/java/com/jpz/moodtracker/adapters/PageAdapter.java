@@ -8,11 +8,9 @@ import com.jpz.moodtracker.controllers.fragments.MoodFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-    private int[] mood;
 
-    public PageAdapter(FragmentManager mgr, int[] mood) {
+    public PageAdapter(FragmentManager mgr) {
         super(mgr);
-        this.mood = mood;
     }
 
     @Override
@@ -22,6 +20,6 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return (MoodFragment.newInstance(this.mood[position]));
+        return (MoodFragment.newInstance(MoodFragment.Mood.Happy));
     }
 }
