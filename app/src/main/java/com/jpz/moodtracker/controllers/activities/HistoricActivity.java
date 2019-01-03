@@ -1,9 +1,12 @@
 package com.jpz.moodtracker.controllers.activities;
 
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,12 +46,53 @@ public class HistoricActivity extends AppCompatActivity {
 
         mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
 
+
+        // Change width Layout
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        try {
+            display.getRealSize(size);
+        } catch (NoSuchMethodError err) {
+            display.getSize(size);
+        }
+        int width = size.x;
+        int height = size.y;
+
+        LinearLayout.LayoutParams lpSad = new LinearLayout.LayoutParams(width/5,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1);
+
+        LinearLayout.LayoutParams lpDisappointed = new LinearLayout.LayoutParams((width/5)*2,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1);
+
+        LinearLayout.LayoutParams lpNormal = new LinearLayout.LayoutParams((width/5)*3,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1);
+
+        LinearLayout.LayoutParams lpHappy = new LinearLayout.LayoutParams((width/5)*4,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1);
+
+        LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1);
+
+        mDayFour.setLayoutParams(lpSad);
+
+        mDaySeven.setLayoutParams(lpDisappointed);
+
+        mDaySix.setLayoutParams(lpNormal);
+
+        mDayFive.setLayoutParams(lpSuperHappy);
+
+        mDayThree.setLayoutParams(lpHappy);
+
+
+
         // Save the comment and print it
         mPreferences = getSharedPreferences("test", MODE_PRIVATE);
 
         mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
 
         printComment();
+
 
         // Save the date and print it
         mPreferences = getSharedPreferences("date", MODE_PRIVATE);

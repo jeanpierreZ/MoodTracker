@@ -11,9 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.R;
-import com.jpz.moodtracker.controllers.fragments.MoodFragment;
+import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.view.VerticalViewPager;
 
 import java.text.SimpleDateFormat;
