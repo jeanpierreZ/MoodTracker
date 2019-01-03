@@ -5,10 +5,12 @@ import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jpz.moodtracker.R;
 
@@ -45,6 +47,8 @@ public class HistoricActivity extends AppCompatActivity {
         mDaySeven = findViewById(R.id.activity_historic_day_seven);
 
         mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
+
+        mButtonSeven.setEnabled(true);
 
 
         // Change width Layout
@@ -83,6 +87,16 @@ public class HistoricActivity extends AppCompatActivity {
         mDayFive.setLayoutParams(lpSuperHappy);
 
         mDayThree.setLayoutParams(lpHappy);
+
+
+        // Display a toast message when click button
+        mButtonSeven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(HistoricActivity.this, "Affiche un commentaire", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
