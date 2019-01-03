@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         // Save the comment
-                        mPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
                         String saveNote = input.getText().toString();
                         mPreferences.edit().putString(BUNDLE_STATE_NOTE, saveNote).apply();
 

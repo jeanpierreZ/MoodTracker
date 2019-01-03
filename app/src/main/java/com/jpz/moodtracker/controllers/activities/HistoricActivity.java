@@ -89,23 +89,19 @@ public class HistoricActivity extends AppCompatActivity {
         mDayThree.setLayoutParams(lpHappy);
 
 
+        // Save the comment
+        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
+        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
+
+
         // Display a toast message when click button
         mButtonSeven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(HistoricActivity.this, "Affiche un commentaire", Toast.LENGTH_LONG).show();
+                Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
             }
         });
 
-
-
-        // Save the comment and print it
-        mPreferences = getSharedPreferences("test", MODE_PRIVATE);
-
-        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
-
-        printComment();
 
 
         // Save the date and print it
@@ -123,9 +119,6 @@ public class HistoricActivity extends AppCompatActivity {
 
     }
 
-    private void printComment() {
-        mDayFive.setText(mNote);
-    }
 
     private void printDate() {
         mDayTwo.setText(msaveDate);
