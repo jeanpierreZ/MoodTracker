@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".controllers.activities.HistoricActivity">
 
-    <TextView
-        android:id="@+id/activity_historic_comment"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintHeight_percent="0.142857"
-        android:background="@color/faded_red"
-        android:text="Display Comment"/>
+    <RelativeLayout
+        android:id="@+id/activity_historic_day_seven"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/warm_grey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Il y a une semaine"/>
+
+        <Button
+            android:id="@+id/activity_historic_seven_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
 
     <TextView
-        android:id="@+id/activity_historic_date"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_comment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.142857"
-        android:background="@color/warm_grey"
-        android:text="Display date"/>
-
-    <TextView
-        android:id="@+id/activity_historic_yesterday"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_date"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintHeight_percent="0.142857"
+        android:id="@+id/activity_historic_day_six"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@color/cornflower_blue_65"
-        android:text="Display Yesterday"/>
+        android:text="Il y a six jours"/>
 
     <TextView
-        android:id="@+id/activity_historic_j-4"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_yesterday"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.80"
-        app:layout_constraintHeight_percent="0.142857"
-        android:background="@color/light_sage"
-        android:text="d-4"/>
-
-    <TextView
-        android:id="@+id/activity_historic_j-5"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_j-4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent="0.142857"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/activity_historic_day_five"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@color/banana_yellow"
-        android:text="d-5"/>
+        android:text="Il y a cinq jours"/>
 
     <TextView
-        android:id="@+id/activity_historic_j-6"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_j-5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.99"
-        app:layout_constraintHeight_percent="0.142857"
-        android:text="d-6"/>
+        android:id="@+id/activity_historic_day_four"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Il y a quatre jours"
+        android:background="@color/faded_red"/>
 
     <TextView
-        android:id="@+id/activity_historic_j-7"
-        app:layout_constraintTop_toBottomOf="@+id/activity_historic_j-6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.99"
-        app:layout_constraintHeight_percent="0.142857"
-        android:text="d-7"/>
+        android:id="@+id/activity_historic_day_three"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/banana_yellow"
+        android:text="Il y a trois jours"/>
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/activity_historic_day_two"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/light_sage"
+        android:text="Avant-hier"/>
+
+    <TextView
+        android:id="@+id/activity_historic_day_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Hier"/>
+
+</LinearLayout>

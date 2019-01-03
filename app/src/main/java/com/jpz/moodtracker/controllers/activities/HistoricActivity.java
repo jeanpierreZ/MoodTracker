@@ -3,16 +3,23 @@ package com.jpz.moodtracker.controllers.activities;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jpz.moodtracker.R;
 
 public class HistoricActivity extends AppCompatActivity {
 
-    private TextView mComment;
-    private TextView mDate;
+    private TextView mDayOne;
+    private TextView mDayTwo;
+    private TextView mDayThree;
+    private TextView mDayFour;
+    private TextView mDayFive;
+    private TextView mDaySix;
+    private RelativeLayout mDaySeven;
 
-    private TextView mYesterday;
+    private Button mButtonSeven;
 
     private String mNote;
     private String msaveDate;
@@ -26,10 +33,15 @@ public class HistoricActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historic);
 
-        mComment = (TextView) findViewById(R.id.activity_historic_comment);
-        mDate = (TextView) findViewById(R.id.activity_historic_date);
+        mDayOne = findViewById(R.id.activity_historic_day_one);
+        mDayTwo = findViewById(R.id.activity_historic_day_two);
+        mDayThree = findViewById(R.id.activity_historic_day_three);
+        mDayFour = findViewById(R.id.activity_historic_day_four);
+        mDayFive = findViewById(R.id.activity_historic_day_five);
+        mDaySix = findViewById(R.id.activity_historic_day_six);
+        mDaySeven = findViewById(R.id.activity_historic_day_seven);
 
-        mYesterday = findViewById(R.id.activity_historic_yesterday);
+        mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
 
         // Save the comment and print it
         mPreferences = getSharedPreferences("test", MODE_PRIVATE);
@@ -54,11 +66,11 @@ public class HistoricActivity extends AppCompatActivity {
     }
 
     private void printComment() {
-        mComment.setText(mNote);
+        mDayFive.setText(mNote);
     }
 
     private void printDate() {
-        mDate.setText(msaveDate);
-        mYesterday.setText(hier);
+        mDayTwo.setText(msaveDate);
+        mDayThree.setText(hier);
     }
 }
