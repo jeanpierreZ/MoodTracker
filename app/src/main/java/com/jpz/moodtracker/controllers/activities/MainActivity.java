@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
     private void configureViewPager() {
         VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
 
-        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()
-        ));
+        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
 
         verticalPager.setCurrentItem(3);
     }

@@ -15,11 +15,24 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return (5);
+        return 5;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return (MoodFragment.newInstance(MoodFragment.Mood.Happy));
+        switch (position) {
+            case 0 :
+                return MoodFragment.newInstance(MoodFragment.Mood.Sad);
+            case 1 :
+                return MoodFragment.newInstance(MoodFragment.Mood.Disappointed);
+            case 2 :
+                return MoodFragment.newInstance(MoodFragment.Mood.Normal);
+            case 3 :
+                return MoodFragment.newInstance(MoodFragment.Mood.Happy);
+            case 4 :
+                return MoodFragment.newInstance(MoodFragment.Mood.SuperHappy);
+            default:
+                return MoodFragment.newInstance(MoodFragment.Mood.Happy);
+        }
     }
 }
