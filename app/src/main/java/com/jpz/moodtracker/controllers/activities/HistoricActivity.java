@@ -86,14 +86,22 @@ public class HistoricActivity extends AppCompatActivity {
 
         if (mMood == 0) {
             mDaySeven.setLayoutParams(lpSad);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.faded_red));
         } else if (mMood == 1) {
             mDaySeven.setLayoutParams(lpDisappointed);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.warm_grey));
         } else if (mMood == 2) {
             mDaySeven.setLayoutParams(lpNormal);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
         } else if (mMood == 3) {
             mDaySeven.setLayoutParams(lpHappy);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.light_sage));
         } else if (mMood == 4) {
             mDaySeven.setLayoutParams(lpSuperHappy);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+        } else {
+            mDaySeven.setLayoutParams(lpHappy);
+            mDaySeven.setBackgroundColor(getResources().getColor(R.color.light_sage));
         }
 
 
