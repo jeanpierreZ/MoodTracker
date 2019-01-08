@@ -118,20 +118,21 @@ public class MainActivity extends AppCompatActivity {
     private void configureViewPager() {
         final VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
 
-        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
-
-        verticalPager.setCurrentItem(3);
-
         // Attach the page change listener inside the activity
         verticalPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             // This method will be invoked when a new page becomes selected
             @Override
             public void onPageSelected(int position) {
                 // Save the position of the mood
-                int mCurrentMood = verticalPager.getCurrentItem();
+                int mcurrentMood = verticalPager.getCurrentItem();
                 mPreferences = getSharedPreferences("currentMood", MODE_PRIVATE);
-                mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mCurrentMood).apply();
+
+                // Save default mood when there is no swipe
+                if (position == 3)
+                    mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mcurrentMood).apply();
+                    // Save mood when there is swipe
+                else
+                    mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mcurrentMood).apply();
             }
 
             // This method will be invoked when the current page is scrolled
@@ -147,6 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 // Code goes here
             }
         });
-    }
 
+        // Display Happy Mood by default
+        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        verticalPager.setCurrentItem(3);
+    }
 }
