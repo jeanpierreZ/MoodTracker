@@ -29,6 +29,8 @@ public class HistoricActivity extends AppCompatActivity {
     private String mNote;
     private String msaveDate;
 
+    private int mMood = 0;
+
     private String hier;
 
     private SharedPreferences mPreferences;
@@ -78,15 +80,21 @@ public class HistoricActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
                 LinearLayout.LayoutParams.MATCH_PARENT, 1);
 
-        mDayFour.setLayoutParams(lpSad);
+        // Give the mood
+        mPreferences = getSharedPreferences("currentMood", MODE_PRIVATE);
+        mMood = mPreferences.getInt(MainActivity.BUNDLE_STATE_CURRENT_MOOD, 0);
 
-        mDaySeven.setLayoutParams(lpDisappointed);
-
-        mDaySix.setLayoutParams(lpNormal);
-
-        mDayFive.setLayoutParams(lpSuperHappy);
-
-        mDayThree.setLayoutParams(lpHappy);
+        if (mMood == 0) {
+            mDaySeven.setLayoutParams(lpSad);
+        } else if (mMood == 1) {
+            mDaySeven.setLayoutParams(lpDisappointed);
+        } else if (mMood == 2) {
+            mDaySeven.setLayoutParams(lpNormal);
+        } else if (mMood == 3) {
+            mDaySeven.setLayoutParams(lpHappy);
+        } else if (mMood == 4) {
+            mDaySeven.setLayoutParams(lpSuperHappy);
+        }
 
 
         // Save the comment

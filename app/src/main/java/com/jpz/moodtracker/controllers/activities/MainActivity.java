@@ -3,6 +3,7 @@ package com.jpz.moodtracker.controllers.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String BUNDLE_STATE_DATE = "BUNDLE_STATE_DATE";
 
     public static final String BUNDLE_STATE_YESTERDAY = "BUNDLE_STATE_YESTERDAY";
+
+    public static final String BUNDLE_STATE_CURRENT_MOOD = "BUNDLE_STATE_CURRENT_MOOD";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,11 +116,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureViewPager() {
-        VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
+        final VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
 
         verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
 
         verticalPager.setCurrentItem(3);
+
+        // Attach the page change listener inside the activity
+        verticalPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            // This method will be invoked when a new page becomes selected
+            @Override
+            public void onPageSelected(int position) {
+                // Save the position of the mood
+                int mCurrentMood = verticalPager.getCurrentItem();
+                mPreferences = getSharedPreferences("currentMood", MODE_PRIVATE);
+                mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mCurrentMood).apply();
+            }
+
+            // This method will be invoked when the current page is scrolled
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Code goes here
+            }
+
+            // Called when the scroll state changes:
+            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // Code goes here
+            }
+        });
     }
 
 }
