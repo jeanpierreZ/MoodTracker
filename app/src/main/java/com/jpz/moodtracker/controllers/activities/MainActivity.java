@@ -29,17 +29,22 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String BUNDLE_STATE_NOTE = "BUNDLE_STATE_NOTE";
 
-    public static final String BUNDLE_STATE_DATE = "BUNDLE_STATE_DATE";
+    public static final String BUNDLE_STATE_TODAY = "BUNDLE_STATE_TODAY";
 
-    public static final String BUNDLE_STATE_YESTERDAY = "BUNDLE_STATE_YESTERDAY";
-
-    public static final String BUNDLE_STATE_CURRENT_MOOD = "BUNDLE_STATE_CURRENT_MOOD";
+    public static final String BUNDLE_STATE_LAST_MOOD = "BUNDLE_STATE_LAST_MOOD";
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Save this day
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        String thisDay = sdf.format(calendar.getTime());
+        mPreferences = getSharedPreferences("today", MODE_PRIVATE);
+        mPreferences.edit().putString(BUNDLE_STATE_TODAY, thisDay).apply();
 
         this.configureViewPager();
 
@@ -78,28 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
                         String saveNote = input.getText().toString();
                         mPreferences.edit().putString(BUNDLE_STATE_NOTE, saveNote).apply();
-
-                        // Save the date
-                        Calendar calendar = Calendar.getInstance();
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-
-                        String strDate = sdf.format(calendar.getTime());
-
-                        mPreferences = getSharedPreferences("date", MODE_PRIVATE);
-                        mPreferences.edit().putString(BUNDLE_STATE_DATE, strDate).apply();
-
-                        // yesterday
-
-                        Calendar yesterday = Calendar.getInstance();
-
-                        yesterday.add(Calendar.DAY_OF_WEEK, -1);
-
-                        String yesterdayDate = sdf.format(yesterday.getTime());
-
-                        mPreferences = getSharedPreferences("yesterday", MODE_PRIVATE);
-                        mPreferences.edit().putString(BUNDLE_STATE_YESTERDAY, yesterdayDate).apply();
-
                         dialog.dismiss();
                     }
                 });
@@ -124,15 +107,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 // Save the position of the mood
-                int mcurrentMood = verticalPager.getCurrentItem();
-                mPreferences = getSharedPreferences("currentMood", MODE_PRIVATE);
+                int mlastMood = verticalPager.getCurrentItem();
+                mPreferences = getSharedPreferences("lastMood", MODE_PRIVATE);
 
                 // Save default mood when there is no swipe
                 if (position == 3)
-                    mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mcurrentMood).apply();
+                    mPreferences.edit().putInt(BUNDLE_STATE_LAST_MOOD, mlastMood).apply();
                     // Save mood when there is swipe
                 else
-                    mPreferences.edit().putInt(BUNDLE_STATE_CURRENT_MOOD, mcurrentMood).apply();
+                    mPreferences.edit().putInt(BUNDLE_STATE_LAST_MOOD, mlastMood).apply();
             }
 
             // This method will be invoked when the current page is scrolled
