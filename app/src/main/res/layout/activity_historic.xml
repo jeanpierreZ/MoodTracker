@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Il y a une semaine"/>
+            tools:text=" Il y a une semaine"/>
 
         <Button
             android:id="@+id/activity_historic_seven_btn"
@@ -29,52 +29,136 @@
             android:background="@drawable/ic_comment_black_48px"/>
     </RelativeLayout>
 
-
-    <TextView
+    <RelativeLayout
         android:id="@+id/activity_historic_day_six"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/cornflower_blue_65"
-        android:text="Il y a six jours"/>
+        android:background="@color/cornflower_blue_65">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Il y a 6 jours"/>
+
+        <Button
+            android:id="@+id/activity_historic_six_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_historic_day_five"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/banana_yellow"
-        android:text="Il y a cinq jours"/>
+        android:background="@color/banana_yellow">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Il y a 5 jours"/>
+
+        <Button
+            android:id="@+id/activity_historic_five_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_historic_day_four"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Il y a quatre jours"
-        android:background="@color/faded_red"/>
+        android:background="@color/faded_red">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Il y a 4 jours"/>
+
+        <Button
+            android:id="@+id/activity_historic_four_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_historic_day_three"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/light_sage"
-        android:text="Il y a trois jours"/>
+        android:background="@color/light_sage">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Il y a 3 jours"/>
+
+        <Button
+            android:id="@+id/activity_historic_three_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_historic_day_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:text="Avant-hier"/>
+        android:background="@color/colorPrimary">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Avant hier"/>
+
+        <Button
+            android:id="@+id/activity_historic_two_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/activity_historic_day_one"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Hier"/>
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text=" Hier"/>
+
+        <Button
+            android:id="@+id/activity_historic_one_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_comment_black_48px"/>
+    </RelativeLayout>
 
 </LinearLayout>

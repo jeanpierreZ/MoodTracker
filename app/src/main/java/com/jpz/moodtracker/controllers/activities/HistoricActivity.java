@@ -20,14 +20,21 @@ import java.util.Locale;
 
 public class HistoricActivity extends AppCompatActivity {
 
-    private TextView mDayOne;
-    private TextView mDayTwo;
-    private TextView mDayThree;
-    private TextView mDayFour;
-    private TextView mDayFive;
-    private TextView mDaySix;
+    private RelativeLayout mDayOne;
+    private RelativeLayout mDayTwo;
+    private RelativeLayout mDayThree;
+    private RelativeLayout mDayFour;
+    private RelativeLayout mDayFive;
+    private RelativeLayout mDaySix;
     private RelativeLayout mDaySeven;
 
+
+    private Button mButtonOne;
+    private Button mButtonTwo;
+    private Button mButtonThree;
+    private Button mButtonFour;
+    private Button mButtonFive;
+    private Button mButtonSix;
     private Button mButtonSeven;
 
     private String mNote;
@@ -49,6 +56,12 @@ public class HistoricActivity extends AppCompatActivity {
         mDaySix = findViewById(R.id.activity_historic_day_six);
         mDaySeven = findViewById(R.id.activity_historic_day_seven);
 
+        mButtonOne = findViewById(R.id.activity_historic_one_btn);
+        mButtonTwo = findViewById(R.id.activity_historic_two_btn);
+        mButtonThree = findViewById(R.id.activity_historic_three_btn);
+        mButtonFour = findViewById(R.id.activity_historic_four_btn);
+        mButtonFive = findViewById(R.id.activity_historic_five_btn);
+        mButtonSix = findViewById(R.id.activity_historic_six_btn);
         mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
 
         mButtonSeven.setEnabled(true);
