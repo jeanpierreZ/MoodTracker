@@ -19,8 +19,6 @@ import java.util.Locale;
 
 public class HistoricActivity extends AppCompatActivity {
 
-    private String mNote;
-
     private SharedPreferences mPreferences;
 
     @Override
@@ -150,7 +148,7 @@ public class HistoricActivity extends AppCompatActivity {
     private void displayComment(String mchosenDay, Button button) {
         // Load the comment
         mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
-        mNote = mPreferences.getString(mchosenDay,null);
+        final String mNote = mPreferences.getString(mchosenDay,null);
 
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
