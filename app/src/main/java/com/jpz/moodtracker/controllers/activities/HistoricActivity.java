@@ -44,8 +44,7 @@ public class HistoricActivity extends AppCompatActivity {
         Button mButtonSix = findViewById(R.id.activity_historic_six_btn);
         Button mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
 
-        mButtonSeven.setEnabled(true);
-
+        // Create historic from yesterday to seven days ago
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
 
         Calendar calendarOne = Calendar.getInstance();
@@ -80,18 +79,13 @@ public class HistoricActivity extends AppCompatActivity {
         this.displayMood(mSix, mDaySix);
         this.displayMood(mSeven, mDaySeven);
 
-         // Load the comment
-        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
-        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
-
-
-        // Display a toast message when click button
-        mButtonSeven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
-            }
-        });
+        this.displayComment(mOne, mButtonOne);
+        this.displayComment(mTwo, mButtonTwo);
+        this.displayComment(mThree, mButtonThree);
+        this.displayComment(mFour, mButtonFour);
+        this.displayComment(mFive, mButtonFive);
+        this.displayComment(mSix, mButtonSix);
+        this.displayComment(mSeven, mButtonSeven);
     }
 
     private void displayMood(String mchosenDay, RelativeLayout relativeLayout) {
@@ -150,6 +144,29 @@ public class HistoricActivity extends AppCompatActivity {
                 break;
             default:
                 relativeLayout.setBackgroundColor(0);
+        }
+    }
+
+    private void displayComment(String mchosenDay, Button button) {
+        // Load the comment
+        mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
+        mNote = mPreferences.getString(mchosenDay,null);
+
+        // If there is a comment, display the button
+        if (mNote != null && !mNote.isEmpty()) {
+            button.setVisibility(View.VISIBLE);
+            button.setEnabled(true);
+            // Display a toast message when click button
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
+                }
+            });
+        // If no comment, don't display the button
+        } else {
+            button.setVisibility(View.INVISIBLE);
+            button.setEnabled(false);
         }
     }
 }

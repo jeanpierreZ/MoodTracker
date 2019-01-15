@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
 
-    public static final String BUNDLE_STATE_NOTE = "BUNDLE_STATE_NOTE";
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 note.setPositiveButton("VALIDER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+                        Calendar calendar = Calendar.getInstance();
+                        String commentToday = sdf.format(calendar.getTime());
 
                         // Save the comment
-                        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
+                        mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
                         String saveNote = input.getText().toString();
-                        mPreferences.edit().putString(BUNDLE_STATE_NOTE, saveNote).apply();
+                        mPreferences.edit().putString(commentToday, saveNote).apply();
                         dialog.dismiss();
                     }
                 });
