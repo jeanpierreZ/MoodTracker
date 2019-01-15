@@ -11,27 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.view.VerticalViewPager;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mconsultHistory;
-    private Button maddNote;
-
     private SharedPreferences mPreferences;
 
     public static final String BUNDLE_STATE_NOTE = "BUNDLE_STATE_NOTE";
-
-    public static final String BUNDLE_STATE_TODAY = "BUNDLE_STATE_TODAY";
-
-    public static final String BUNDLE_STATE_LAST_MOOD = "BUNDLE_STATE_LAST_MOOD";
 
 
     @Override
@@ -39,17 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Save this day
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-        String thisDay = sdf.format(calendar.getTime());
-        mPreferences = getSharedPreferences("today", MODE_PRIVATE);
-        mPreferences.edit().putString(BUNDLE_STATE_TODAY, thisDay).apply();
-
         this.configureViewPager();
 
-        maddNote = findViewById(R.id.activity_main_note_add);
-        mconsultHistory = findViewById(R.id.activity_main_history);
+        Button maddNote = findViewById(R.id.activity_main_note_add);
+        Button mconsultHistory = findViewById(R.id.activity_main_history);
 
         maddNote.setEnabled(true);
         mconsultHistory.setEnabled(true);
@@ -106,16 +90,21 @@ public class MainActivity extends AppCompatActivity {
             // This method will be invoked when a new page becomes selected
             @Override
             public void onPageSelected(int position) {
-                // Save the position of the mood
                 int mlastMood = verticalPager.getCurrentItem();
-                mPreferences = getSharedPreferences("lastMood", MODE_PRIVATE);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+                Calendar calendar = Calendar.getInstance();
+                String mtoday = sdf.format(calendar.getTime());
 
                 // Save default mood when there is no swipe
-                if (position == 3)
-                    mPreferences.edit().putInt(BUNDLE_STATE_LAST_MOOD, mlastMood).apply();
-                    // Save mood when there is swipe
-                else
-                    mPreferences.edit().putInt(BUNDLE_STATE_LAST_MOOD, mlastMood).apply();
+                if (position == 3) {
+                    mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
+
+                } // Save mood when there is swipe
+                else {
+                    mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
+                }
             }
 
             // This method will be invoked when the current page is scrolled

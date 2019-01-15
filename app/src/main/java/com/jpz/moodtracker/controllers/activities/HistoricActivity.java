@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jpz.moodtracker.R;
@@ -20,26 +19,7 @@ import java.util.Locale;
 
 public class HistoricActivity extends AppCompatActivity {
 
-    private RelativeLayout mDayOne;
-    private RelativeLayout mDayTwo;
-    private RelativeLayout mDayThree;
-    private RelativeLayout mDayFour;
-    private RelativeLayout mDayFive;
-    private RelativeLayout mDaySix;
-    private RelativeLayout mDaySeven;
-
-
-    private Button mButtonOne;
-    private Button mButtonTwo;
-    private Button mButtonThree;
-    private Button mButtonFour;
-    private Button mButtonFive;
-    private Button mButtonSix;
-    private Button mButtonSeven;
-
     private String mNote;
-
-    private int mMood = 0;
 
     private SharedPreferences mPreferences;
 
@@ -48,26 +28,74 @@ public class HistoricActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historic);
 
-        mDayOne = findViewById(R.id.activity_historic_day_one);
-        mDayTwo = findViewById(R.id.activity_historic_day_two);
-        mDayThree = findViewById(R.id.activity_historic_day_three);
-        mDayFour = findViewById(R.id.activity_historic_day_four);
-        mDayFive = findViewById(R.id.activity_historic_day_five);
-        mDaySix = findViewById(R.id.activity_historic_day_six);
-        mDaySeven = findViewById(R.id.activity_historic_day_seven);
+        RelativeLayout mDayOne = findViewById(R.id.activity_historic_day_one);
+        RelativeLayout mDayTwo = findViewById(R.id.activity_historic_day_two);
+        RelativeLayout mDayThree = findViewById(R.id.activity_historic_day_three);
+        RelativeLayout mDayFour = findViewById(R.id.activity_historic_day_four);
+        RelativeLayout mDayFive = findViewById(R.id.activity_historic_day_five);
+        RelativeLayout mDaySix = findViewById(R.id.activity_historic_day_six);
+        RelativeLayout mDaySeven = findViewById(R.id.activity_historic_day_seven);
 
-        mButtonOne = findViewById(R.id.activity_historic_one_btn);
-        mButtonTwo = findViewById(R.id.activity_historic_two_btn);
-        mButtonThree = findViewById(R.id.activity_historic_three_btn);
-        mButtonFour = findViewById(R.id.activity_historic_four_btn);
-        mButtonFive = findViewById(R.id.activity_historic_five_btn);
-        mButtonSix = findViewById(R.id.activity_historic_six_btn);
-        mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
+        Button mButtonOne = findViewById(R.id.activity_historic_one_btn);
+        Button mButtonTwo = findViewById(R.id.activity_historic_two_btn);
+        Button mButtonThree = findViewById(R.id.activity_historic_three_btn);
+        Button mButtonFour = findViewById(R.id.activity_historic_four_btn);
+        Button mButtonFive = findViewById(R.id.activity_historic_five_btn);
+        Button mButtonSix = findViewById(R.id.activity_historic_six_btn);
+        Button mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
 
         mButtonSeven.setEnabled(true);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
 
-        // Change width Layout
+        Calendar calendarOne = Calendar.getInstance();
+        Calendar calendarTwo = Calendar.getInstance();
+        Calendar calendarThree = Calendar.getInstance();
+        Calendar calendarFour = Calendar.getInstance();
+        Calendar calendarFive = Calendar.getInstance();
+        Calendar calendarSix = Calendar.getInstance();
+        Calendar calendarSeven = Calendar.getInstance();
+
+        calendarOne.add(Calendar.MINUTE,-1);
+        calendarTwo.add(Calendar.MINUTE,-2);
+        calendarThree.add(Calendar.MINUTE,-3);
+        calendarFour.add(Calendar.MINUTE,-4);
+        calendarFive.add(Calendar.MINUTE,-5);
+        calendarSix.add(Calendar.MINUTE,-6);
+        calendarSeven.add(Calendar.MINUTE,-7);
+
+        String mOne = sdf.format(calendarOne.getTime());
+        String mTwo = sdf.format(calendarTwo.getTime());
+        String mThree = sdf.format(calendarThree.getTime());
+        String mFour = sdf.format(calendarFour.getTime());
+        String mFive = sdf.format(calendarFive.getTime());
+        String mSix = sdf.format(calendarSix.getTime());
+        String mSeven = sdf.format(calendarSeven.getTime());
+
+        this.displayMood(mOne, mDayOne);
+        this.displayMood(mTwo, mDayTwo);
+        this.displayMood(mThree, mDayThree);
+        this.displayMood(mFour, mDayFour);
+        this.displayMood(mFive, mDayFive);
+        this.displayMood(mSix, mDaySix);
+        this.displayMood(mSeven, mDaySeven);
+
+         // Load the comment
+        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
+        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
+
+
+        // Display a toast message when click button
+        mButtonSeven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void displayMood(String mchosenDay, RelativeLayout relativeLayout) {
+        // Change the width of the layout
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         try {
@@ -94,59 +122,34 @@ public class HistoricActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
                 LinearLayout.LayoutParams.MATCH_PARENT, 1);
 
-        // Load the last day when the mood is choose
-        mPreferences = getSharedPreferences("today", MODE_PRIVATE);
-        String lastDay = mPreferences.getString(MainActivity.BUNDLE_STATE_TODAY, null);
+        // Load the mood of the chosen day
+        mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+        int mMood = mPreferences.getInt(mchosenDay, -1);
 
-        // Get today
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-        String today = sdf.format(calendar.getTime());
-
-        // Compare if the last day of the mood selected is different that today
-        if(!lastDay.equals(today)){
-
-            // Load the last mood
-            mPreferences = getSharedPreferences("lastMood", MODE_PRIVATE);
-            mMood = mPreferences.getInt(MainActivity.BUNDLE_STATE_LAST_MOOD, 0);
-
-            // Set mood's attributes
-            if (mMood == 0) {
-                mDaySeven.setLayoutParams(lpSad);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.faded_red));
-            } else if (mMood == 1) {
-                mDaySeven.setLayoutParams(lpDisappointed);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.warm_grey));
-            } else if (mMood == 2) {
-                mDaySeven.setLayoutParams(lpNormal);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
-            } else if (mMood == 3) {
-                mDaySeven.setLayoutParams(lpHappy);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.light_sage));
-            } else if (mMood == 4) {
-                mDaySeven.setLayoutParams(lpSuperHappy);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
-            } else {
-                mDaySeven.setLayoutParams(lpHappy);
-                mDaySeven.setBackgroundColor(getResources().getColor(R.color.light_sage));
-            }
-            // The last mood was selected today, so there is no mood's attribute to register in the raw
-        } else {
-            mDaySeven.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        // Display mood width and color
+        switch (mMood) {
+            case 0:
+                relativeLayout.setLayoutParams(lpSad);
+                relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
+                break;
+            case 1:
+                relativeLayout.setLayoutParams(lpDisappointed);
+                relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
+                break;
+            case 2:
+                relativeLayout.setLayoutParams(lpNormal);
+                relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
+                break;
+            case 3:
+                relativeLayout.setLayoutParams(lpHappy);
+                relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
+                break;
+            case 4:
+                relativeLayout.setLayoutParams(lpSuperHappy);
+                relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+                break;
+            default:
+                relativeLayout.setBackgroundColor(0);
         }
-
-
-        // Load the comment
-        mPreferences = getSharedPreferences("Commentaire", MODE_PRIVATE);
-        mNote = mPreferences.getString(MainActivity.BUNDLE_STATE_NOTE,null);
-
-
-        // Display a toast message when click button
-        mButtonSeven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
