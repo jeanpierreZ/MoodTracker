@@ -5,7 +5,13 @@
     <color name="colorAccent">#ff00796b</color>
 
     <!-- Background color of the Historic layout -->
-    <color name="light_gray">#D3D3D3</color>
+    <color name="light_grey">#D3D3D3</color>
+
+    <!-- Background color of the toast message -->
+    <color name="very_dark_grey">#3c3c3c</color>
+
+    <!-- Text color of the toast message -->
+    <color name="white">#ffffff</color>
 
     <!-- Background colors used for the different moods -->
     <color name="faded_red">#ffde3c50</color>

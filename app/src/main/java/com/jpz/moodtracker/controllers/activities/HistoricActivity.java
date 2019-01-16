@@ -5,15 +5,14 @@ import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.jpz.moodtracker.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -166,7 +165,6 @@ public class HistoricActivity extends AppCompatActivity {
         // Load the comment
         mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
         final String mNote = mPreferences.getString(mchosenDay,null);
-
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
@@ -175,10 +173,22 @@ public class HistoricActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(HistoricActivity.this, mNote, Toast.LENGTH_SHORT).show();
+                    //Create toast
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.BOTTOM,0,40);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    // Create view
+                    TextView tvToast =  new TextView(HistoricActivity.this);
+                    tvToast.setPadding(40,40,40,40);
+                    tvToast.setBackgroundColor(getResources().getColor(R.color.very_dark_grey));
+                    tvToast.setTextColor(getResources().getColor(R.color.white));
+                    tvToast.setText(mNote);
+                    // Display the toast message
+                    toast.setView(tvToast);
+                    toast.show();
                 }
             });
-        // If no comment, don't display the button
+        // If there is no comment, don't display the button
         } else {
             button.setVisibility(View.INVISIBLE);
             button.setEnabled(false);
