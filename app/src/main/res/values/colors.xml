@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff00796b</color>
 
+    <!-- Background color of the Historic layout -->
+    <color name="light_gray">#D3D3D3</color>
+
     <!-- Background colors used for the different moods -->
     <color name="faded_red">#ffde3c50</color>
     <color name="warm_grey">#ff9b9b9b</color>

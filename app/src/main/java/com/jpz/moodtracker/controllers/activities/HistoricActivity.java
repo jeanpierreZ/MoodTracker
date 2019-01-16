@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jpz.moodtracker.R;
@@ -34,13 +35,29 @@ public class HistoricActivity extends AppCompatActivity {
         RelativeLayout mDaySix = findViewById(R.id.activity_historic_day_six);
         RelativeLayout mDaySeven = findViewById(R.id.activity_historic_day_seven);
 
-        Button mButtonOne = findViewById(R.id.activity_historic_one_btn);
-        Button mButtonTwo = findViewById(R.id.activity_historic_two_btn);
-        Button mButtonThree = findViewById(R.id.activity_historic_three_btn);
-        Button mButtonFour = findViewById(R.id.activity_historic_four_btn);
-        Button mButtonFive = findViewById(R.id.activity_historic_five_btn);
-        Button mButtonSix = findViewById(R.id.activity_historic_six_btn);
-        Button mButtonSeven = findViewById(R.id.activity_historic_seven_btn);
+        Button mButtonOne = findViewById(R.id.activity_historic_btn_one);
+        Button mButtonTwo = findViewById(R.id.activity_historic_btn_two);
+        Button mButtonThree = findViewById(R.id.activity_historic_btn_three);
+        Button mButtonFour = findViewById(R.id.activity_historic_btn_four);
+        Button mButtonFive = findViewById(R.id.activity_historic_btn_five);
+        Button mButtonSix = findViewById(R.id.activity_historic_btn_six);
+        Button mButtonSeven = findViewById(R.id.activity_historic_btn_seven);
+
+        TextView mTextViewOne = findViewById(R.id.activity_historic_text_one);
+        TextView mTextViewTwo = findViewById(R.id.activity_historic_text_two);
+        TextView mTextViewThree = findViewById(R.id.activity_historic_text_three);
+        TextView mTextViewFour = findViewById(R.id.activity_historic_text_four);
+        TextView mTextViewFive = findViewById(R.id.activity_historic_text_five);
+        TextView mTextViewSix = findViewById(R.id.activity_historic_text_six);
+        TextView mTextViewSeven = findViewById(R.id.activity_historic_text_seven);
+
+        mTextViewOne.setText(getString(R.string.day_1));
+        mTextViewTwo.setText(getString(R.string.day_2));
+        mTextViewThree.setText(getString(R.string.day_3));
+        mTextViewFour.setText(getString(R.string.day_4));
+        mTextViewFive.setText(getString(R.string.day_5));
+        mTextViewSix.setText(getString(R.string.day_6));
+        mTextViewSeven.setText(getString(R.string.day_7));
 
         // Create historic from yesterday to seven days ago
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);

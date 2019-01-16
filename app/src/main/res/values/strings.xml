@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">MoodTracker</string>
 
+    <!-- Strings used for the Historic moods -->
+    <string name="day_7"> Il y a une semaine</string>
+    <string name="day_6"> Il y a six jours</string>
+    <string name="day_5"> Il y a cinq jours</string>
+    <string name="day_4"> Il y a quatre jours</string>
+    <string name="day_3"> Il y a trois jours</string>
+    <string name="day_2"> Avant-hier</string>
+    <string name="day_1"> Hier</string>
+
 </resources>
