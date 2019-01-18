@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/ic_note_add_black" />
+        android:background="@drawable/ic_note_add_black"/>
 
     <Button
         android:id="@+id/activity_main_history"
@@ -24,7 +24,17 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/ic_history_black" />
+        android:background="@drawable/ic_history_black"/>
+
+    <Button
+        android:id="@+id/activity_main_share"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_share_48px_mdpi"/>
 
     <com.jpz.moodtracker.view.VerticalViewPager
         android:id="@+id/activity_main_viewpager"
