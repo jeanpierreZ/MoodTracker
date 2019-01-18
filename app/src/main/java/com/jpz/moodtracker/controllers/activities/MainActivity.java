@@ -3,12 +3,12 @@ package com.jpz.moodtracker.controllers.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 note.setPositiveButton(getString(R.string.validateComment), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
                         Calendar calendar = Calendar.getInstance();
                         String commentToday = sdf.format(calendar.getTime());
 
@@ -98,49 +98,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureViewPager() {
-        final VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
-
-        // Attach the page change listener inside the activity
-        verticalPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            // This method will be invoked when a new page becomes selected
+        final VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
+        // Display Vertical ViewPager and Happy Mood by default
+        verticalViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        verticalViewPager.setCurrentItem(3);
+        verticalViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onPageSelected(int position) {
-                // Load today's Mood
-                int mlastMood = verticalPager.getCurrentItem();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+            public boolean onTouch(View v, MotionEvent event) {
+                // Save mood when touch the screen
+                int mlastMood = verticalViewPager.getCurrentItem();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
                 Calendar calendar = Calendar.getInstance();
                 String mtoday = sdf.format(calendar.getTime());
-
-                // Save default mood when there is no swipe
-                if (position == 3) {
-                    mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+                mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+                // Return false for action_move/up/down to preserve swipes of verticalViewPager
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     mPreferences.edit().putInt(mtoday, mlastMood).apply();
-
-                } // Save mood when there is a swipe
-                else {
-                    mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+                    return false;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     mPreferences.edit().putInt(mtoday, mlastMood).apply();
+                    return false;
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
+                    return false;
                 }
-            }
-            // This method will be invoked when the current page is scrolled
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            // Called when the scroll state changes:
-            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                return true;
             }
         });
-        // Display Happy Mood by default
-        verticalPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
-        verticalPager.setCurrentItem(3);
     }
 
     private void sendSMS() {
         // Get the mood of today
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         Calendar calendar = Calendar.getInstance();
         String mtoday = sdf.format(calendar.getTime());
         mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);

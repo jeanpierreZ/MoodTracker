@@ -59,7 +59,7 @@ public class HistoricActivity extends AppCompatActivity {
         mTextViewSeven.setText(getString(R.string.day_7));
 
         // Create historic from yesterday to seven days ago
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
 
         Calendar calendarOne = Calendar.getInstance();
         Calendar calendarTwo = Calendar.getInstance();
