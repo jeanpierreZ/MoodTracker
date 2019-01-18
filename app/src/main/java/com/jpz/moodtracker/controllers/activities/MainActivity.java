@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +23,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-    private Calendar calendar = Calendar.getInstance();
-    private String mtoday = sdf.format(calendar.getTime());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +60,13 @@ public class MainActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT);
                 input.setLayoutParams(lp);
                 note.setView(input);
+
                 // Configure positive button
                 note.setPositiveButton(getString(R.string.validateComment), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-                        //Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+                        Calendar calendar = Calendar.getInstance();
                         String commentToday = sdf.format(calendar.getTime());
 
                         // Save the comment
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+
                 // Configure negative button
                 note.setNegativeButton(getString(R.string.cancelComment), new DialogInterface.OnClickListener() {
                     @Override
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureViewPager() {
         final VerticalViewPager verticalPager = findViewById(R.id.activity_main_viewpager);
+
         // Attach the page change listener inside the activity
         verticalPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             // This method will be invoked when a new page becomes selected
@@ -106,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 // Load today's Mood
                 int mlastMood = verticalPager.getCurrentItem();
-                //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-                //Calendar calendar = Calendar.getInstance();
-                //String mtoday = sdf.format(calendar.getTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+                Calendar calendar = Calendar.getInstance();
+                String mtoday = sdf.format(calendar.getTime());
 
                 // Save default mood when there is no swipe
                 if (position == 3) {
@@ -139,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendSMS() {
         // Get the mood of today
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-        //Calendar calendar = Calendar.getInstance();
-        //String mtoday = sdf.format(calendar.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+        Calendar calendar = Calendar.getInstance();
+        String mtoday = sdf.format(calendar.getTime());
         mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
         int mMood = mPreferences.getInt(mtoday, -1);
 
@@ -166,5 +167,21 @@ public class MainActivity extends AppCompatActivity {
         }
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, Intent.EXTRA_TEXT));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                sendSMS();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
