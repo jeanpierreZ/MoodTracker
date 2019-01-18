@@ -69,13 +69,13 @@ public class HistoricActivity extends AppCompatActivity {
         Calendar calendarSix = Calendar.getInstance();
         Calendar calendarSeven = Calendar.getInstance();
 
-        calendarOne.add(Calendar.MINUTE,-1);
-        calendarTwo.add(Calendar.MINUTE,-2);
-        calendarThree.add(Calendar.MINUTE,-3);
-        calendarFour.add(Calendar.MINUTE,-4);
-        calendarFive.add(Calendar.MINUTE,-5);
-        calendarSix.add(Calendar.MINUTE,-6);
-        calendarSeven.add(Calendar.MINUTE,-7);
+        calendarOne.add(Calendar.DAY_OF_WEEK,-1);
+        calendarTwo.add(Calendar.DAY_OF_WEEK,-2);
+        calendarThree.add(Calendar.DAY_OF_WEEK,-3);
+        calendarFour.add(Calendar.DAY_OF_WEEK,-4);
+        calendarFive.add(Calendar.DAY_OF_WEEK,-5);
+        calendarSix.add(Calendar.DAY_OF_WEEK,-6);
+        calendarSeven.add(Calendar.DAY_OF_WEEK,-7);
 
         String mOne = sdf.format(calendarOne.getTime());
         String mTwo = sdf.format(calendarTwo.getTime());
