@@ -33,11 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button maddComment = findViewById(R.id.activity_main_note_add);
         Button mconsultHistoric = findViewById(R.id.activity_main_history);
-        Button mshare = findViewById(R.id.activity_main_share);
-
-        maddComment.setEnabled(true);
-        mconsultHistoric.setEnabled(true);
-        mshare.setEnabled(true);
 
         // Configure historic button
         mconsultHistoric.setOnClickListener(new View.OnClickListener() {
@@ -85,14 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 note.show();
-            }
-        });
-
-        // Configure share button
-        mshare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendSMS();
             }
         });
     }
