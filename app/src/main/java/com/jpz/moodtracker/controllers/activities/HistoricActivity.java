@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.jpz.moodtracker.R;
+import com.jpz.moodtracker.model.UseSharedPreferences;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -59,7 +60,7 @@ public class HistoricActivity extends AppCompatActivity {
         mTextViewSeven.setText(getString(R.string.day_7));
 
         // Create historic from yesterday to seven days ago
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
 
         Calendar calendarOne = Calendar.getInstance();
         Calendar calendarTwo = Calendar.getInstance();
@@ -69,13 +70,13 @@ public class HistoricActivity extends AppCompatActivity {
         Calendar calendarSix = Calendar.getInstance();
         Calendar calendarSeven = Calendar.getInstance();
 
-        calendarOne.add(Calendar.DAY_OF_WEEK,-1);
-        calendarTwo.add(Calendar.DAY_OF_WEEK,-2);
-        calendarThree.add(Calendar.DAY_OF_WEEK,-3);
-        calendarFour.add(Calendar.DAY_OF_WEEK,-4);
-        calendarFive.add(Calendar.DAY_OF_WEEK,-5);
-        calendarSix.add(Calendar.DAY_OF_WEEK,-6);
-        calendarSeven.add(Calendar.DAY_OF_WEEK,-7);
+        calendarOne.add(Calendar.MINUTE,-1);
+        calendarTwo.add(Calendar.MINUTE,-2);
+        calendarThree.add(Calendar.MINUTE,-3);
+        calendarFour.add(Calendar.MINUTE,-4);
+        calendarFive.add(Calendar.MINUTE,-5);
+        calendarSix.add(Calendar.MINUTE,-6);
+        calendarSeven.add(Calendar.MINUTE,-7);
 
         String mOne = sdf.format(calendarOne.getTime());
         String mTwo = sdf.format(calendarTwo.getTime());
@@ -163,12 +164,11 @@ public class HistoricActivity extends AppCompatActivity {
 
     private void displayComment(String mchosenDay, Button button) {
         // Load the comment
-        mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
-        final String mNote = mPreferences.getString(mchosenDay,null);
+        mPreferences = getSharedPreferences("TEST", MODE_PRIVATE);
+        final String mNote = UseSharedPreferences.getComment(Calendar.getInstance().getTime());
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
-            button.setEnabled(true);
             // Display a toast message when click button
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -190,8 +190,7 @@ public class HistoricActivity extends AppCompatActivity {
             });
         // If there is no comment, don't display the button
         } else {
-            button.setVisibility(View.INVISIBLE);
-            button.setEnabled(false);
+            button.setVisibility(View.GONE);
         }
     }
 }

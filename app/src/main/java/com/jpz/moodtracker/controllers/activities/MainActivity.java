@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
+import com.jpz.moodtracker.model.UseSharedPreferences;
 import com.jpz.moodtracker.view.VerticalViewPager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,14 +61,9 @@ public class MainActivity extends AppCompatActivity {
                 note.setPositiveButton(getString(R.string.validateComment), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-                        Calendar calendar = Calendar.getInstance();
-                        String commentToday = sdf.format(calendar.getTime());
-
                         // Save the comment
-                        mPreferences = getSharedPreferences("Comment", MODE_PRIVATE);
-                        String saveNote = input.getText().toString();
-                        mPreferences.edit().putString(commentToday, saveNote).apply();
+                        mPreferences = getSharedPreferences("TEST", MODE_PRIVATE);
+                        UseSharedPreferences.saveComment(Calendar.getInstance().getTime(), input.getText().toString());
                         dialog.dismiss();
                     }
                 });
@@ -94,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 // Save mood when touch the screen
                 int mlastMood = verticalViewPager.getCurrentItem();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
                 Calendar calendar = Calendar.getInstance();
                 String mtoday = sdf.format(calendar.getTime());
                 mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
@@ -116,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendSMS() {
         // Get the mood of today
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
         Calendar calendar = Calendar.getInstance();
         String mtoday = sdf.format(calendar.getTime());
         mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
