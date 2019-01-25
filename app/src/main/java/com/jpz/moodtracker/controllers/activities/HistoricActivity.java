@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,6 +25,8 @@ public class HistoricActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historic);
+
+        new UseSharedPreferences(getApplicationContext());
 
         RelativeLayout mDayOne = findViewById(R.id.activity_historic_day_one);
         RelativeLayout mDayTwo = findViewById(R.id.activity_historic_day_two);
@@ -175,7 +176,6 @@ public class HistoricActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //Create toast
                     Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.BOTTOM,0,40);
                     toast.setDuration(Toast.LENGTH_SHORT);
                     // Create view
                     TextView tvToast =  new TextView(HistoricActivity.this);

@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Create instance of UseSharedPreferences class from the activity as follows :
+        new UseSharedPreferences(getApplicationContext());
+
         this.configureViewPager();
 
         Button maddComment = findViewById(R.id.activity_main_note_add);

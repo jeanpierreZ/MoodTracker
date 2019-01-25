@@ -12,7 +12,12 @@ public class UseSharedPreferences {
 
     private static SharedPreferences mPreferences;
 
-    public UseSharedPreferences(Context context) {
+    // variable to hold context
+    public Context context;
+
+    //save the context received via constructor in a local variable
+    public UseSharedPreferences(Context context){
+        this.context = context;
         mPreferences = context.getSharedPreferences("TEST", MODE_PRIVATE);
     }
 
