@@ -2,7 +2,6 @@ package com.jpz.moodtracker.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.jpz.moodtracker.controllers.fragments.MoodFragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -26,7 +25,7 @@ public class UseSharedPreferences {
         return sdf.format(date);
     }
 
-    public static void saveMood(Date date, MoodFragment.Mood mood) {
+    public static void saveMood(Date date, Mood mood) {
         mPreferences.edit().putString(getKey(date), mood.toString()).apply();
     }
 

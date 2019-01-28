@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.jpz.moodtracker.R;
+import com.jpz.moodtracker.model.Mood;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,14 +25,6 @@ public class MoodFragment extends Fragment {
 
     public MoodFragment() {
         // Required empty public constructor
-    }
-
-    public enum Mood {
-        Sad,
-        Disappointed,
-        Normal,
-        Happy,
-        SuperHappy
     }
 
     public static MoodFragment newInstance(Mood mood) {
