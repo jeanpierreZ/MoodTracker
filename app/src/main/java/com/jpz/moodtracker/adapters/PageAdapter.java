@@ -3,8 +3,8 @@ package com.jpz.moodtracker.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import com.jpz.moodtracker.controllers.fragments.MoodFragment;
+import com.jpz.moodtracker.model.Mood;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
@@ -22,17 +22,17 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0 :
-                return MoodFragment.newInstance(MoodFragment.Mood.Sad);
+                return MoodFragment.newInstance(Mood.Sad);
             case 1 :
-                return MoodFragment.newInstance(MoodFragment.Mood.Disappointed);
+                return MoodFragment.newInstance(Mood.Disappointed);
             case 2 :
-                return MoodFragment.newInstance(MoodFragment.Mood.Normal);
+                return MoodFragment.newInstance(Mood.Normal);
             case 3 :
-                return MoodFragment.newInstance(MoodFragment.Mood.Happy);
+                return MoodFragment.newInstance(Mood.Happy);
             case 4 :
-                return MoodFragment.newInstance(MoodFragment.Mood.SuperHappy);
+                return MoodFragment.newInstance(Mood.SuperHappy);
             default:
-                return MoodFragment.newInstance(MoodFragment.Mood.Happy);
+                return MoodFragment.newInstance(Mood.Happy);
         }
     }
 }

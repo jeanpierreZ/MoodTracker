@@ -12,7 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.jpz.moodtracker.R;
-import com.jpz.moodtracker.model.UseSharedPreferences;
+import com.jpz.moodtracker.model.MySharedPreferences;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -21,12 +22,12 @@ public class HistoricActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
 
+    private MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historic);
-
-        new UseSharedPreferences(getApplicationContext());
 
         RelativeLayout mDayOne = findViewById(R.id.activity_historic_day_one);
         RelativeLayout mDayTwo = findViewById(R.id.activity_historic_day_two);
@@ -165,8 +166,7 @@ public class HistoricActivity extends AppCompatActivity {
 
     private void displayComment(String mchosenDay, Button button) {
         // Load the comment
-        mPreferences = getSharedPreferences("TEST", MODE_PRIVATE);
-        final String mNote = UseSharedPreferences.getComment(Calendar.getInstance().getTime());
+        final String mNote = prefs.getComment(Calendar.getInstance().getTime());
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);

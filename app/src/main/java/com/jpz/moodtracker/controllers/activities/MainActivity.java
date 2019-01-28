@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
-import com.jpz.moodtracker.model.UseSharedPreferences;
+import com.jpz.moodtracker.model.MySharedPreferences;
 import com.jpz.moodtracker.view.VerticalViewPager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create instance of UseSharedPreferences class from the activity as follows :
-        new UseSharedPreferences(getApplicationContext());
-
-        this.configureViewPager();
-
         Button maddComment = findViewById(R.id.activity_main_note_add);
         Button mconsultHistoric = findViewById(R.id.activity_main_history);
+
+        // Create instance of MySharedPreferences class
+        final MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+
+        this.configureViewPager();
 
         // Configure historic button
         mconsultHistoric.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Save the comment
-                        mPreferences = getSharedPreferences("TEST", MODE_PRIVATE);
-                        UseSharedPreferences.saveComment(Calendar.getInstance().getTime(), input.getText().toString());
+                        prefs.saveComment(Calendar.getInstance().getTime(), input.getText().toString());
                         dialog.dismiss();
                     }
                 });

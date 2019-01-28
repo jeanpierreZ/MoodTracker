@@ -42,9 +42,11 @@ public class MoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Get layout for MoodFragment
         View result = inflater.inflate(R.layout.fragment_mood, container, false);
+
         // Get widgets from layout
         moodColor = result.findViewById(R.id.fragment_mood);
         moodSmiley = result.findViewById(R.id.fragment_mood_smiley);
+
         // Action when click on the smiley
         moodSmiley.setOnClickListener(new View.OnClickListener() {
             @Override
