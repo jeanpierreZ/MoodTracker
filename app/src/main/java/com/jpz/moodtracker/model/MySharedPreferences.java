@@ -9,7 +9,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MySharedPreferences {
 
-    private static SharedPreferences prefs;
+    private SharedPreferences prefs;
 
     public MySharedPreferences(Context context){
         prefs = context.getSharedPreferences("TEST", MODE_PRIVATE);

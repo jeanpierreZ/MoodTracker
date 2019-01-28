@@ -2,28 +2,32 @@ package com.jpz.moodtracker.controllers.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
+import com.jpz.moodtracker.controllers.fragments.MoodFragment;
+import com.jpz.moodtracker.model.Mood;
 import com.jpz.moodtracker.model.MySharedPreferences;
 import com.jpz.moodtracker.view.VerticalViewPager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import static com.jpz.moodtracker.model.Mood.Disappointed;
+import static com.jpz.moodtracker.model.Mood.Happy;
+import static com.jpz.moodtracker.model.Mood.Normal;
+import static com.jpz.moodtracker.model.Mood.Sad;
+import static com.jpz.moodtracker.model.Mood.SuperHappy;
 
-public class MainActivity extends AppCompatActivity {
-
-    private SharedPreferences mPreferences;
+public class MainActivity extends AppCompatActivity implements MoodFragment.OnSmileyClickedListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Button maddComment = findViewById(R.id.activity_main_note_add);
         Button mconsultHistoric = findViewById(R.id.activity_main_history);
 
-        // Create instance of MySharedPreferences class
         final MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
         this.configureViewPager();
@@ -87,29 +90,6 @@ public class MainActivity extends AppCompatActivity {
         // Display Vertical ViewPager and Happy Mood by default
         verticalViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         verticalViewPager.setCurrentItem(3);
-        verticalViewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Save mood when touch the screen
-                int mlastMood = verticalViewPager.getCurrentItem();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-                Calendar calendar = Calendar.getInstance();
-                String mtoday = sdf.format(calendar.getTime());
-                mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
-                // Return false for action_move/up/down to preserve swipes of verticalViewPager
-                if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
-                    return false;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
-                    return false;
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mPreferences.edit().putInt(mtoday, mlastMood).apply();
-                    return false;
-                }
-                return true;
-            }
-        });
     }
 
     private void sendSMS() {
@@ -117,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
         Calendar calendar = Calendar.getInstance();
         String mtoday = sdf.format(calendar.getTime());
-        mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
+        /*
         int mMood = mPreferences.getInt(mtoday, -1);
 
         // Send the mood
@@ -141,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, Intent.EXTRA_TEXT));
+        */
     }
 
     @Override
@@ -158,4 +139,43 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void OnSmileyClicked(View view) {
+
+        //MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+
+        Snackbar.make(findViewById(android.R.id.content), "Tu as clické sur le smiley ", Snackbar.LENGTH_SHORT).show();
+
+        /*
+        //Initialize value
+        Mood mood = Mood.SuperHappy;
+
+        switch (mood) {
+            case Sad:
+                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une très mauvaise humeur ", Snackbar.LENGTH_SHORT).show();
+                //prefs.saveMood(Calendar.getInstance().getTime(), Sad);
+                break;
+            case Disappointed:
+                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une mauvaise humeur", Snackbar.LENGTH_SHORT).show();
+                //prefs.saveMood(Calendar.getInstance().getTime(), Disappointed);
+                break;
+            case Normal:
+                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une humeur normale", Snackbar.LENGTH_SHORT).show();
+                //prefs.saveMood(Calendar.getInstance().getTime(), Normal);
+                break;
+            case Happy:
+                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une bonne humeur", Snackbar.LENGTH_SHORT).show();
+                //prefs.saveMood(Calendar.getInstance().getTime(), Happy);
+                break;
+            case SuperHappy:
+                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une super bonne humeur", Snackbar.LENGTH_SHORT).show();
+                //prefs.saveMood(Calendar.getInstance().getTime(), SuperHappy);
+                break;
+        }
+
+*/
+
+    }
 }
+

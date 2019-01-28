@@ -1,6 +1,5 @@
 package com.jpz.moodtracker.controllers.activities;
 
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,14 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.model.MySharedPreferences;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class HistoricActivity extends AppCompatActivity {
-
-    private SharedPreferences mPreferences;
 
     private MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
@@ -132,9 +128,8 @@ public class HistoricActivity extends AppCompatActivity {
         // Get the width's raw of the super happy mood
         LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
                 LinearLayout.LayoutParams.MATCH_PARENT, 1);
-
+/*
         // Load the mood of the chosen day
-        mPreferences = getSharedPreferences("Historic", MODE_PRIVATE);
         int mMood = mPreferences.getInt(mchosenDay, -1);
 
         // Display mood width and color
@@ -162,14 +157,17 @@ public class HistoricActivity extends AppCompatActivity {
             default:
                 relativeLayout.setBackgroundColor(0);
         }
+        */
     }
 
     private void displayComment(String mchosenDay, Button button) {
         // Load the comment
         final String mNote = prefs.getComment(Calendar.getInstance().getTime());
+
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
+
             // Display a toast message when click button
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
