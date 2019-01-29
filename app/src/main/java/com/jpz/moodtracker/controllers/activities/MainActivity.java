@@ -141,46 +141,41 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
     @Override
     public void OnSmileyClicked(View view) {
-
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
-        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
-
+        // Personalize Snackbar
         Snackbar snackbar = Snackbar
-                .make(findViewById(android.R.id.content), "", 1000);
+                .make(findViewById(android.R.id.content), "", 750);
         View sbView = snackbar.getView();
         TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setBackgroundColor(Color.BLACK);
+        textView.setTextSize(20);
 
+        // Save Mood and display a snackbar confirmation
+        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
         switch (verticalViewPager.getCurrentItem()) {
             case 0:
                 textView.setText(getString(R.string.sad));
-                textView.setTextColor(getResources().getColor(R.color.faded_red));
                 snackbar.show();
                 prefs.saveMood(mtoday, Sad);
                 break;
             case 1:
                 textView.setText(getString(R.string.disappointed));
-                textView.setTextColor(getResources().getColor(R.color.warm_grey));
                 snackbar.show();
                 prefs.saveMood(mtoday, Disappointed);
                 break;
             case 2:
                 textView.setText(getString(R.string.normal));
-                textView.setTextColor(getResources().getColor(R.color.cornflower_blue_65));
                 snackbar.show();
                 prefs.saveMood(mtoday, Normal);
                 break;
             case 3:
                 textView.setText(getString(R.string.happy));
-                textView.setTextColor(getResources().getColor(R.color.light_sage));
                 snackbar.show();
                 prefs.saveMood(mtoday, Happy);
                 break;
             case 4:
                 textView.setText(getString(R.string.superHappy));
-                textView.setTextColor(getResources().getColor(R.color.banana_yellow));
                 snackbar.show();
                 prefs.saveMood(mtoday, SuperHappy);
                 break;

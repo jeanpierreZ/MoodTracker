@@ -1,6 +1,5 @@
 package com.jpz.moodtracker.controllers.activities;
 
-import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +15,11 @@ import com.jpz.moodtracker.model.Mood;
 import com.jpz.moodtracker.model.MySharedPreferences;
 import java.util.Calendar;
 import java.util.Date;
+import static com.jpz.moodtracker.model.Mood.Disappointed;
+import static com.jpz.moodtracker.model.Mood.Happy;
+import static com.jpz.moodtracker.model.Mood.Normal;
+import static com.jpz.moodtracker.model.Mood.Sad;
+import static com.jpz.moodtracker.model.Mood.SuperHappy;
 
 public class HistoricActivity extends AppCompatActivity {
 
@@ -56,48 +60,19 @@ public class HistoricActivity extends AppCompatActivity {
         mTextViewSix.setText(getString(R.string.day_6));
         mTextViewSeven.setText(getString(R.string.day_7));
 
-        Calendar calendarOne = Calendar.getInstance();
-        Calendar calendarTwo = Calendar.getInstance();
-        Calendar calendarThree = Calendar.getInstance();
-        Calendar calendarFour = Calendar.getInstance();
-        Calendar calendarFive = Calendar.getInstance();
-        Calendar calendarSix = Calendar.getInstance();
-        Calendar calendarSeven = Calendar.getInstance();
+        RelativeLayout[] layouts = {mDayOne, mDayTwo, mDayThree, mDayFour, mDayFive, mDaySix, mDaySeven};
+        Button[] buttons = {mButtonOne, mButtonTwo, mButtonThree, mButtonFour, mButtonFive, mButtonSix, mButtonSeven};
 
-        calendarOne.add(Calendar.MINUTE,-1);
-        calendarTwo.add(Calendar.MINUTE,-2);
-        calendarThree.add(Calendar.MINUTE,-3);
-        calendarFour.add(Calendar.MINUTE,-4);
-        calendarFive.add(Calendar.MINUTE,-5);
-        calendarSix.add(Calendar.MINUTE,-6);
-        calendarSeven.add(Calendar.MINUTE,-7);
-
-        Date mOne = calendarOne.getTime();
-        Date mTwo = calendarTwo.getTime();
-        Date mThree = calendarThree.getTime();
-        Date mFour = calendarFour.getTime();
-        Date mFive = calendarFive.getTime();
-        Date mSix = calendarSix.getTime();
-        Date mSeven = calendarSeven.getTime();
-
-        this.displayMood(mOne, mDayOne);
-        this.displayMood(mTwo, mDayTwo);
-        this.displayMood(mThree, mDayThree);
-        this.displayMood(mFour, mDayFour);
-        this.displayMood(mFive, mDayFive);
-        this.displayMood(mSix, mDaySix);
-        this.displayMood(mSeven, mDaySeven);
-
-        this.displayComment(mOne, mButtonOne);
-        this.displayComment(mTwo, mButtonTwo);
-        this.displayComment(mThree, mButtonThree);
-        this.displayComment(mFour, mButtonFour);
-        this.displayComment(mFive, mButtonFive);
-        this.displayComment(mSix, mButtonSix);
-        this.displayComment(mSeven, mButtonSeven);
+        // Loop to display moods and comment in the seven past days
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 7; i++) {
+            calendar.add(Calendar.MINUTE, -1);
+            this.displayMood(calendar.getTime(), layouts[i]);
+            this.displayComment(calendar.getTime(), buttons[i]);
+        }
     }
 
-    private void displayMood(Date mChosenDay, RelativeLayout relativeLayout) {
+    private void layoutParams(RelativeLayout relativeLayout, Mood mood) {
         // Change the width of the layout
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -109,59 +84,68 @@ public class HistoricActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        // Get the width's raw of the sad mood
-        LinearLayout.LayoutParams lpSad = new LinearLayout.LayoutParams(width/5,
-                LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        // Get the width's raw of the disappointed mood
-        LinearLayout.LayoutParams lpDisappointed = new LinearLayout.LayoutParams((width/5)*2,
-                LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        // Get the width's raw of the normal mood
-        LinearLayout.LayoutParams lpNormal = new LinearLayout.LayoutParams((width/5)*3,
-                LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        // Get the width's raw of the happy mood
-        LinearLayout.LayoutParams lpHappy = new LinearLayout.LayoutParams((width/5)*4,
-                LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        // Get the width's raw of the super happy mood
-        LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
-                LinearLayout.LayoutParams.MATCH_PARENT, 1);
-
-        // Load the mood of the chosen day
-        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-
-        Mood pastMood = prefs.getMood(mChosenDay);
-
-        // Display mood width and color
-        switch (pastMood) {
+        // Get the width's raw of moods
+        switch (mood) {
             case Sad:
-                relativeLayout.setLayoutParams(lpSad);
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
+                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width / 5,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 break;
             case Disappointed:
-                relativeLayout.setLayoutParams(lpDisappointed);
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
+                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 2,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 break;
             case Normal:
-                relativeLayout.setLayoutParams(lpNormal);
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
+                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 3,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 break;
             case Happy:
-                relativeLayout.setLayoutParams(lpHappy);
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
+                relativeLayout.setLayoutParams(new  LinearLayout.LayoutParams((width / 5) * 4,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 break;
             case SuperHappy:
-                relativeLayout.setLayoutParams(lpSuperHappy);
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
                 break;
-            default:
-                relativeLayout.setBackgroundColor(Color.WHITE);
         }
+    }
+
+    private void displayMood(Date mChosenDay, RelativeLayout relativeLayout) {
+        // Load the mood of the chosen day
+        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        Mood pastMood = prefs.getMood(mChosenDay);
+
+            // Display mood width and color
+            switch (pastMood) {
+                case Sad:
+                    this.layoutParams(relativeLayout, Sad);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
+                    break;
+                case Disappointed:
+                    this.layoutParams(relativeLayout, Disappointed);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
+                    break;
+                case Normal:
+                    this.layoutParams(relativeLayout, Normal);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
+                    break;
+                case Happy:
+                    this.layoutParams(relativeLayout, Happy);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
+                    break;
+                case SuperHappy:
+                    this.layoutParams(relativeLayout, SuperHappy);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+                    break;
+                default:
+                    relativeLayout.setBackgroundColor(0);
+            }
     }
 
     private void displayComment(Date mChosenDay, Button button) {
         // Get the comment of the chosen day
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-
         final String mNote = prefs.getComment(mChosenDay);
+
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
