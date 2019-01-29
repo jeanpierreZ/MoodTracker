@@ -1,5 +1,6 @@
 package com.jpz.moodtracker.controllers.activities;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,14 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.jpz.moodtracker.R;
+import com.jpz.moodtracker.model.Mood;
 import com.jpz.moodtracker.model.MySharedPreferences;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
 public class HistoricActivity extends AppCompatActivity {
-
-    private MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +56,6 @@ public class HistoricActivity extends AppCompatActivity {
         mTextViewSix.setText(getString(R.string.day_6));
         mTextViewSeven.setText(getString(R.string.day_7));
 
-        // Create historic from yesterday to seven days ago
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-
         Calendar calendarOne = Calendar.getInstance();
         Calendar calendarTwo = Calendar.getInstance();
         Calendar calendarThree = Calendar.getInstance();
@@ -76,13 +72,13 @@ public class HistoricActivity extends AppCompatActivity {
         calendarSix.add(Calendar.MINUTE,-6);
         calendarSeven.add(Calendar.MINUTE,-7);
 
-        String mOne = sdf.format(calendarOne.getTime());
-        String mTwo = sdf.format(calendarTwo.getTime());
-        String mThree = sdf.format(calendarThree.getTime());
-        String mFour = sdf.format(calendarFour.getTime());
-        String mFive = sdf.format(calendarFive.getTime());
-        String mSix = sdf.format(calendarSix.getTime());
-        String mSeven = sdf.format(calendarSeven.getTime());
+        Date mOne = calendarOne.getTime();
+        Date mTwo = calendarTwo.getTime();
+        Date mThree = calendarThree.getTime();
+        Date mFour = calendarFour.getTime();
+        Date mFive = calendarFive.getTime();
+        Date mSix = calendarSix.getTime();
+        Date mSeven = calendarSeven.getTime();
 
         this.displayMood(mOne, mDayOne);
         this.displayMood(mTwo, mDayTwo);
@@ -101,7 +97,7 @@ public class HistoricActivity extends AppCompatActivity {
         this.displayComment(mSeven, mButtonSeven);
     }
 
-    private void displayMood(String mchosenDay, RelativeLayout relativeLayout) {
+    private void displayMood(Date mChosenDay, RelativeLayout relativeLayout) {
         // Change the width of the layout
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -128,47 +124,48 @@ public class HistoricActivity extends AppCompatActivity {
         // Get the width's raw of the super happy mood
         LinearLayout.LayoutParams lpSuperHappy = new LinearLayout.LayoutParams(width,
                 LinearLayout.LayoutParams.MATCH_PARENT, 1);
-/*
+
         // Load the mood of the chosen day
-        int mMood = mPreferences.getInt(mchosenDay, -1);
+        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+
+        Mood pastMood = prefs.getMood(mChosenDay);
 
         // Display mood width and color
-        switch (mMood) {
-            case 0:
+        switch (pastMood) {
+            case Sad:
                 relativeLayout.setLayoutParams(lpSad);
                 relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
                 break;
-            case 1:
+            case Disappointed:
                 relativeLayout.setLayoutParams(lpDisappointed);
                 relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
                 break;
-            case 2:
+            case Normal:
                 relativeLayout.setLayoutParams(lpNormal);
                 relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
                 break;
-            case 3:
+            case Happy:
                 relativeLayout.setLayoutParams(lpHappy);
                 relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
                 break;
-            case 4:
+            case SuperHappy:
                 relativeLayout.setLayoutParams(lpSuperHappy);
                 relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
                 break;
             default:
-                relativeLayout.setBackgroundColor(0);
+                relativeLayout.setBackgroundColor(Color.WHITE);
         }
-        */
     }
 
-    private void displayComment(String mchosenDay, Button button) {
-        // Load the comment
-        final String mNote = prefs.getComment(Calendar.getInstance().getTime());
+    private void displayComment(Date mChosenDay, Button button) {
+        // Get the comment of the chosen day
+        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
+        final String mNote = prefs.getComment(mChosenDay);
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
-
-            // Display a toast message when click button
+            // Display the comment in a toast message when button's clicked
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -186,7 +183,7 @@ public class HistoricActivity extends AppCompatActivity {
                     toast.show();
                 }
             });
-        // If there is no comment, don't display the button
+            // If there is no comment, don't display the button
         } else {
             button.setVisibility(View.GONE);
         }
