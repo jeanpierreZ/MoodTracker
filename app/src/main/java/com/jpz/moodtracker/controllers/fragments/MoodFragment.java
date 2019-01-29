@@ -15,7 +15,7 @@ import com.jpz.moodtracker.model.Mood;
  * A simple {@link Fragment} subclass.
  */
 
-public class MoodFragment extends Fragment implements View.OnClickListener {
+public class MoodFragment extends Fragment {
 
     public MoodFragment() {
         // Required empty public constructor
@@ -46,7 +46,13 @@ public class MoodFragment extends Fragment implements View.OnClickListener {
         ImageView moodSmiley = result.findViewById(R.id.fragment_mood_smiley);
 
         // Action when click on the smiley
-        moodSmiley.setOnClickListener(this);
+        moodSmiley.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Spread the click to the parent activity
+                mCallback.OnSmileyClicked(v);
+            }
+        });
 
         // Get data from Bundle
         final Mood mood = (Mood) getArguments().getSerializable(KEY_MOOD);
@@ -83,15 +89,8 @@ public class MoodFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         // Call the method that creating callback after being attached to parent activity
         this.createCallbackToParentActivity();
-    }
-
-    @Override
-    public void onClick(View v) {
-        // Spread the click to the parent activity
-        mCallback.OnSmileyClicked(v);
     }
 
     // Declare our interface that will be implemented by any container activity

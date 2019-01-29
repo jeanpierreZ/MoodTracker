@@ -2,6 +2,7 @@ package com.jpz.moodtracker.controllers.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.controllers.fragments.MoodFragment;
 import com.jpz.moodtracker.model.Mood;
 import com.jpz.moodtracker.model.MySharedPreferences;
 import com.jpz.moodtracker.view.VerticalViewPager;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 import static com.jpz.moodtracker.model.Mood.Disappointed;
 import static com.jpz.moodtracker.model.Mood.Happy;
 import static com.jpz.moodtracker.model.Mood.Normal;
@@ -28,6 +29,8 @@ import static com.jpz.moodtracker.model.Mood.Sad;
 import static com.jpz.moodtracker.model.Mood.SuperHappy;
 
 public class MainActivity extends AppCompatActivity implements MoodFragment.OnSmileyClickedListener {
+
+    private Date mtoday = Calendar.getInstance().getTime();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Save the comment
-                        prefs.saveComment(Calendar.getInstance().getTime(), input.getText().toString());
+                        prefs.saveComment(mtoday, input.getText().toString());
                         dialog.dismiss();
                     }
                 });
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     }
 
     private void configureViewPager() {
-        final VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
+        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
         // Display Vertical ViewPager and Happy Mood by default
         verticalViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         verticalViewPager.setCurrentItem(3);
@@ -94,34 +97,30 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
     private void sendSMS() {
         // Get the mood of today
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
-        Calendar calendar = Calendar.getInstance();
-        String mtoday = sdf.format(calendar.getTime());
-        /*
-        int mMood = mPreferences.getInt(mtoday, -1);
+        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        Mood dailyMood = prefs.getMood(mtoday);
 
         // Send the mood
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        switch (mMood) {
-            case 0:
+        switch (dailyMood) {
+            case Sad:
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sad));
                 break;
-            case 1:
+            case Disappointed:
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.disappointed));
                 break;
-            case 2:
+            case Normal:
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.normal));
                 break;
-            case 3:
+            case Happy:
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.happy));
                 break;
-            case 4:
+            case SuperHappy:
                 sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.superHappy));
                 break;
         }
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, Intent.EXTRA_TEXT));
-        */
     }
 
     @Override
@@ -143,39 +142,49 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     @Override
     public void OnSmileyClicked(View view) {
 
-        //MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
-        Snackbar.make(findViewById(android.R.id.content), "Tu as clické sur le smiley ", Snackbar.LENGTH_SHORT).show();
+        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
 
-        /*
-        //Initialize value
-        Mood mood = Mood.SuperHappy;
+        Snackbar snackbar = Snackbar
+                .make(findViewById(android.R.id.content), "", 1000);
+        View sbView = snackbar.getView();
+        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setBackgroundColor(Color.BLACK);
 
-        switch (mood) {
-            case Sad:
-                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une très mauvaise humeur ", Snackbar.LENGTH_SHORT).show();
-                //prefs.saveMood(Calendar.getInstance().getTime(), Sad);
+        switch (verticalViewPager.getCurrentItem()) {
+            case 0:
+                textView.setText(getString(R.string.sad));
+                textView.setTextColor(getResources().getColor(R.color.faded_red));
+                snackbar.show();
+                prefs.saveMood(mtoday, Sad);
                 break;
-            case Disappointed:
-                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une mauvaise humeur", Snackbar.LENGTH_SHORT).show();
-                //prefs.saveMood(Calendar.getInstance().getTime(), Disappointed);
+            case 1:
+                textView.setText(getString(R.string.disappointed));
+                textView.setTextColor(getResources().getColor(R.color.warm_grey));
+                snackbar.show();
+                prefs.saveMood(mtoday, Disappointed);
                 break;
-            case Normal:
-                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une humeur normale", Snackbar.LENGTH_SHORT).show();
-                //prefs.saveMood(Calendar.getInstance().getTime(), Normal);
+            case 2:
+                textView.setText(getString(R.string.normal));
+                textView.setTextColor(getResources().getColor(R.color.cornflower_blue_65));
+                snackbar.show();
+                prefs.saveMood(mtoday, Normal);
                 break;
-            case Happy:
-                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une bonne humeur", Snackbar.LENGTH_SHORT).show();
-                //prefs.saveMood(Calendar.getInstance().getTime(), Happy);
+            case 3:
+                textView.setText(getString(R.string.happy));
+                textView.setTextColor(getResources().getColor(R.color.light_sage));
+                snackbar.show();
+                prefs.saveMood(mtoday, Happy);
                 break;
-            case SuperHappy:
-                Snackbar.make(findViewById(android.R.id.content), "Tu as choisi une super bonne humeur", Snackbar.LENGTH_SHORT).show();
-                //prefs.saveMood(Calendar.getInstance().getTime(), SuperHappy);
+            case 4:
+                textView.setText(getString(R.string.superHappy));
+                textView.setTextColor(getResources().getColor(R.color.banana_yellow));
+                snackbar.show();
+                prefs.saveMood(mtoday, SuperHappy);
                 break;
         }
-
-*/
-
     }
 }
 
