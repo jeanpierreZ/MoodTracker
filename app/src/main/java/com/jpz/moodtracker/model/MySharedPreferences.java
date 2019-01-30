@@ -9,7 +9,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MySharedPreferences {
 
-    private SharedPreferences prefs;
+    private static SharedPreferences prefs;
 
     public MySharedPreferences(Context context){
         prefs = context.getSharedPreferences("TEST", MODE_PRIVATE);
@@ -30,6 +30,9 @@ public class MySharedPreferences {
     }
 
     public Mood getMood(Date date) {
+        if (prefs.getString(getMoodKey(date), null) == null)
+            return Mood.valueOf(prefs.getString(getMoodKey(date), "Null"));
+        else
         return Mood.valueOf(prefs.getString(getMoodKey(date), null));
     }
 

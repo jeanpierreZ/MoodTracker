@@ -2,7 +2,6 @@ package com.jpz.moodtracker.controllers.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,8 +29,6 @@ import static com.jpz.moodtracker.model.Mood.SuperHappy;
 
 public class MainActivity extends AppCompatActivity implements MoodFragment.OnSmileyClickedListener {
 
-    private Date mtoday = Calendar.getInstance().getTime();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +39,12 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
         final MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
+        // Call VerticalViewPager
         this.configureViewPager();
+
+        // Save Happy mood when mobile's app launched
+        Date mtoday = Calendar.getInstance().getTime();
+        prefs.saveMood(mtoday, Happy);
 
         // Configure historic button
         mconsultHistoric.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Save the comment
+                        Date mtoday = Calendar.getInstance().getTime();
                         prefs.saveComment(mtoday, input.getText().toString());
                         dialog.dismiss();
                     }
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     private void sendSMS() {
         // Get the mood of today
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        Date mtoday = Calendar.getInstance().getTime();
         Mood dailyMood = prefs.getMood(mtoday);
 
         // Send the mood
@@ -142,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     @Override
     public void OnSmileyClicked(View view) {
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        Date mtoday = Calendar.getInstance().getTime();
 
         // Personalize Snackbar
         Snackbar snackbar = Snackbar
