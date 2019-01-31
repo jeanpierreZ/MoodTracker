@@ -63,7 +63,7 @@ public class HistoricActivity extends AppCompatActivity {
         RelativeLayout[] layouts = {mDayOne, mDayTwo, mDayThree, mDayFour, mDayFive, mDaySix, mDaySeven};
         Button[] buttons = {mButtonOne, mButtonTwo, mButtonThree, mButtonFour, mButtonFive, mButtonSix, mButtonSeven};
 
-        // Loop to display moods and comment in the seven past days
+        // Loop to display moods and comments in the seven past days
         Calendar calendar = Calendar.getInstance();
         for (int i = 0; i < 7; i++) {
             calendar.add(Calendar.MINUTE, -1);
@@ -109,10 +109,10 @@ public class HistoricActivity extends AppCompatActivity {
         }
     }
 
-    private void displayMood(Date mChosenDay, RelativeLayout relativeLayout) {
+    private void displayMood(Date date, RelativeLayout relativeLayout) {
         // Load the mood of the chosen day
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-        Mood pastMood = prefs.getMood(mChosenDay);
+        Mood pastMood = prefs.getMood(date);
 
             // Display mood width and color
             switch (pastMood) {
@@ -141,10 +141,10 @@ public class HistoricActivity extends AppCompatActivity {
             }
     }
 
-    private void displayComment(Date mChosenDay, Button button) {
+    private void displayComment(Date date, Button button) {
         // Get the comment of the chosen day
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-        final String mNote = prefs.getComment(mChosenDay);
+        final String mNote = prefs.getComment(date);
 
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
@@ -156,7 +156,7 @@ public class HistoricActivity extends AppCompatActivity {
                     //Create toast
                     Toast toast = new Toast(getApplicationContext());
                     toast.setDuration(Toast.LENGTH_SHORT);
-                    // Create view
+                    // Personalize toast view
                     TextView tvToast =  new TextView(HistoricActivity.this);
                     tvToast.setPadding(40,40,40,40);
                     tvToast.setBackgroundColor(getResources().getColor(R.color.very_dark_grey));

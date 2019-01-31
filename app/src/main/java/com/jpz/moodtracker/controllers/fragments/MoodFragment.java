@@ -28,7 +28,9 @@ public class MoodFragment extends Fragment {
     private OnSmileyClickedListener mCallback;
 
     public static MoodFragment newInstance(Mood mood) {
+        // Create new fragment
         MoodFragment moodFragment = new MoodFragment();
+        // Create bundle and add it some data
         Bundle args = new Bundle();
         args.putSerializable(KEY_MOOD, mood);
         moodFragment.setArguments(args);

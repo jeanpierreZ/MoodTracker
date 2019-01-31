@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button maddComment = findViewById(R.id.activity_main_note_add);
-        Button mconsultHistoric = findViewById(R.id.activity_main_history);
+        Button addComment = findViewById(R.id.activity_main_note_add);
+        Button consultHistoric = findViewById(R.id.activity_main_history);
 
         final MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
 
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         this.configureViewPager();
 
         // Save Happy mood when mobile's app launched
-        Date mtoday = Calendar.getInstance().getTime();
-        prefs.saveMood(mtoday, Happy);
+        Date today = Calendar.getInstance().getTime();
+        prefs.saveMood(today, Happy);
 
         // Configure historic button
-        mconsultHistoric.setOnClickListener(new View.OnClickListener() {
+        consultHistoric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent historicActivityIntent = new Intent(MainActivity.this, HistoricActivity.class);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         });
 
         // Configure comment button
-        maddComment.setOnClickListener(new View.OnClickListener() {
+        addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View w) {
                 AlertDialog.Builder note = new AlertDialog.Builder(MainActivity.this);
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Save the comment
-                        Date mtoday = Calendar.getInstance().getTime();
-                        prefs.saveComment(mtoday, input.getText().toString());
+                        Date today = Calendar.getInstance().getTime();
+                        prefs.saveComment(today, input.getText().toString());
                         dialog.dismiss();
                     }
                 });
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
     private void configureViewPager() {
         VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
-        // Display Vertical ViewPager and Happy Mood by default
+        // Display Vertical ViewPager with Happy Mood by default
         verticalViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         verticalViewPager.setCurrentItem(3);
     }
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     private void sendSMS() {
         // Get the mood of today
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-        Date mtoday = Calendar.getInstance().getTime();
-        Mood dailyMood = prefs.getMood(mtoday);
+        Date today = Calendar.getInstance().getTime();
+        Mood dailyMood = prefs.getMood(today);
 
         // Send the mood
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -146,11 +146,10 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     @Override
     public void OnSmileyClicked(View view) {
         MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
-        Date mtoday = Calendar.getInstance().getTime();
+        Date today = Calendar.getInstance().getTime();
 
-        // Personalize Snackbar
-        Snackbar snackbar = Snackbar
-                .make(findViewById(android.R.id.content), "", 750);
+        // Create and personalize snackbar
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "", 750);
         View sbView = snackbar.getView();
         TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -162,27 +161,27 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
             case 0:
                 textView.setText(getString(R.string.sad));
                 snackbar.show();
-                prefs.saveMood(mtoday, Sad);
+                prefs.saveMood(today, Sad);
                 break;
             case 1:
                 textView.setText(getString(R.string.disappointed));
                 snackbar.show();
-                prefs.saveMood(mtoday, Disappointed);
+                prefs.saveMood(today, Disappointed);
                 break;
             case 2:
                 textView.setText(getString(R.string.normal));
                 snackbar.show();
-                prefs.saveMood(mtoday, Normal);
+                prefs.saveMood(today, Normal);
                 break;
             case 3:
                 textView.setText(getString(R.string.happy));
                 snackbar.show();
-                prefs.saveMood(mtoday, Happy);
+                prefs.saveMood(today, Happy);
                 break;
             case 4:
                 textView.setText(getString(R.string.superHappy));
                 snackbar.show();
-                prefs.saveMood(mtoday, SuperHappy);
+                prefs.saveMood(today, SuperHappy);
                 break;
         }
     }

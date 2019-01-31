@@ -22,4 +22,7 @@
     <string name="cancelComment">ANNULER</string>
     <string name="validateComment">VALIDER</string>
 
+    <!-- Strings used for ActionBar -->
+    <string name="share">Share</string>
+
 </resources>
