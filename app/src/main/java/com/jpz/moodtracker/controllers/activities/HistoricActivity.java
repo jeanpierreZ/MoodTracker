@@ -18,10 +18,14 @@ import java.util.Date;
 
 public class HistoricActivity extends AppCompatActivity {
 
+    private MySharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historic);
+
+        prefs = new MySharedPreferences(getApplicationContext());
 
         RelativeLayout mDayOne = findViewById(R.id.activity_historic_day_one);
         RelativeLayout mDayTwo = findViewById(R.id.activity_historic_day_two);
@@ -80,44 +84,45 @@ public class HistoricActivity extends AppCompatActivity {
         int height = size.y;
 
         // Load the mood of the chosen day
-        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
         Mood mood = prefs.getMood(date);
 
-        // Display mood width and color
-        switch (mood) {
-            case Sad:
-                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width / 5,
-                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
-                break;
-            case Disappointed:
-                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 2,
-                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
-                break;
-            case Normal:
-                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 3,
-                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
-                break;
-            case Happy:
-                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 4,
-                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
-                break;
-            case SuperHappy:
-                relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width,
-                        LinearLayout.LayoutParams.MATCH_PARENT, 1));
-                relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
-                break;
-            default:
-                relativeLayout.setBackgroundColor(0);
+        if (mood == null) {
+            relativeLayout.setBackgroundColor(0);
+        } else {
+
+            // Display mood width and color
+            switch (mood) {
+                case Sad:
+                    relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width / 5,
+                            LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
+                    break;
+                case Disappointed:
+                    relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 2,
+                            LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
+                    break;
+                case Normal:
+                    relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 3,
+                            LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
+                    break;
+                case Happy:
+                    relativeLayout.setLayoutParams(new LinearLayout.LayoutParams((width / 5) * 4,
+                            LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
+                    break;
+                case SuperHappy:
+                    relativeLayout.setLayoutParams(new LinearLayout.LayoutParams(width,
+                            LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+                    break;
+            }
         }
     }
 
     private void displayComment(Date date, Button button) {
         // Get the comment of the chosen day
-        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
         final String mNote = prefs.getComment(date);
 
         // If there is a comment, display the button

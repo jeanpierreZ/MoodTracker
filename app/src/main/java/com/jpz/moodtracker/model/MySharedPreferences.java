@@ -30,10 +30,11 @@ public class MySharedPreferences {
     }
 
     public Mood getMood(Date date) {
-        if (prefs.getString(getMoodKey(date), null) == null)
-            return Mood.valueOf(prefs.getString(getMoodKey(date), "NoMood"));
-        else
-        return Mood.valueOf(prefs.getString(getMoodKey(date), null));
+        String moodValue = prefs.getString(getMoodKey(date), null);
+        if (moodValue != null) {
+            return Mood.valueOf(moodValue);
+        }
+        return null;
     }
 
     public void saveComment(Date date, String comment) {

@@ -29,6 +29,8 @@ import static com.jpz.moodtracker.model.Mood.SuperHappy;
 
 public class MainActivity extends AppCompatActivity implements MoodFragment.OnSmileyClickedListener {
 
+    private MySharedPreferences prefs;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +39,10 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         Button addComment = findViewById(R.id.activity_main_note_add);
         Button consultHistoric = findViewById(R.id.activity_main_history);
 
-        final MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
+        prefs = new MySharedPreferences(getApplicationContext());
 
         // Call VerticalViewPager
         this.configureViewPager();
-
-        // Save Happy mood when mobile's app launched
-        Date today = Calendar.getInstance().getTime();
-        prefs.saveMood(today, Happy);
 
         // Configure historic button
         consultHistoric.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
     private void sendSMS() {
         // Get the mood of today
-        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
         Date today = Calendar.getInstance().getTime();
         Mood dailyMood = prefs.getMood(today);
 
@@ -145,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
 
     @Override
     public void OnSmileyClicked(View view) {
-        MySharedPreferences prefs = new MySharedPreferences(this.getApplicationContext());
         Date today = Calendar.getInstance().getTime();
 
         // Create and personalize snackbar
@@ -160,30 +156,25 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         switch (verticalViewPager.getCurrentItem()) {
             case 0:
                 textView.setText(getString(R.string.sad));
-                snackbar.show();
                 prefs.saveMood(today, Sad);
                 break;
             case 1:
                 textView.setText(getString(R.string.disappointed));
-                snackbar.show();
                 prefs.saveMood(today, Disappointed);
                 break;
             case 2:
                 textView.setText(getString(R.string.normal));
-                snackbar.show();
                 prefs.saveMood(today, Normal);
                 break;
             case 3:
                 textView.setText(getString(R.string.happy));
-                snackbar.show();
                 prefs.saveMood(today, Happy);
                 break;
             case 4:
                 textView.setText(getString(R.string.superHappy));
-                snackbar.show();
                 prefs.saveMood(today, SuperHappy);
                 break;
         }
+        snackbar.show();
     }
 }
-

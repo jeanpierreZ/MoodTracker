@@ -6,5 +6,4 @@ public enum Mood {
     Normal,
     Happy,
     SuperHappy,
-    NoMood
 }
