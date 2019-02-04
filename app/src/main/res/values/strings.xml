@@ -16,6 +16,7 @@
     <string name="normal">Je suis d\'humeur normale</string>
     <string name="happy">Je suis de bonne humeur</string>
     <string name="superHappy">Je suis de super bonne humeur</string>
+    <string name="errorMessage">Vous n\'avez pas choisi d\'humeur</string>
 
     <!-- Strings used for add a comment -->
     <string name="titleComment">Commentaire</string>

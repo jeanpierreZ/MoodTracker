@@ -9,15 +9,18 @@ import com.jpz.moodtracker.model.Mood;
 public class PageAdapter extends FragmentPagerAdapter {
 
 
+    // Default Constructor
     public PageAdapter(FragmentManager mgr) {
         super(mgr);
     }
 
+    // Number of page to show
     @Override
     public int getCount() {
         return 5;
     }
 
+    // Page to return according to the mood
     @Override
     public Fragment getItem(int position) {
         switch (position) {

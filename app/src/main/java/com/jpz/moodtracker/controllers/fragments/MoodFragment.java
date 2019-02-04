@@ -62,7 +62,6 @@ public class MoodFragment extends Fragment {
             return result;
         }
         final Mood mood = (Mood) getArguments().getSerializable(KEY_MOOD);
-
         if (mood != null) {
             switch (mood) {
                 // Update widgets whit it

@@ -1,6 +1,7 @@
 package com.jpz.moodtracker.view;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -35,7 +36,7 @@ public class VerticalViewPager extends ViewPager {
     private class VerticalPageTransformer implements ViewPager.PageTransformer {
 
         @Override
-        public void transformPage(View view, float position) {
+        public void transformPage(@NonNull View view, float position) {
 
             if (position < -1) { // [-Infinity,-1)
                 // This page is way off-screen to the left.

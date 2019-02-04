@@ -83,13 +83,13 @@ public class HistoricActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        // Load the mood of the chosen day
+        // Get a mood from a past day
         Mood mood = prefs.getMood(date);
 
+        // If there is no mood, there is nothing to display
         if (mood == null) {
             relativeLayout.setBackgroundColor(0);
         } else {
-
             // Display mood width and color
             switch (mood) {
                 case Sad:
@@ -128,22 +128,11 @@ public class HistoricActivity extends AppCompatActivity {
         // If there is a comment, display the button
         if (mNote != null && !mNote.isEmpty()) {
             button.setVisibility(View.VISIBLE);
-            // Display the comment in a toast message when button's clicked
+            // Display the comment in a toast message when button clicked
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Create toast
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    // Personalize toast view
-                    TextView tvToast =  new TextView(HistoricActivity.this);
-                    tvToast.setPadding(40,40,40,40);
-                    tvToast.setBackgroundColor(getResources().getColor(R.color.very_dark_grey));
-                    tvToast.setTextColor(getResources().getColor(R.color.white));
-                    tvToast.setText(mNote);
-                    // Display the toast message
-                    toast.setView(tvToast);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), mNote, Toast.LENGTH_SHORT).show();
                 }
             });
             // If there is no comment, don't display the button

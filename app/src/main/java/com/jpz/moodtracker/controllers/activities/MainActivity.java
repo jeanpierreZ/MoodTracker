@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.jpz.moodtracker.R;
 import com.jpz.moodtracker.adapters.PageAdapter;
 import com.jpz.moodtracker.controllers.fragments.MoodFragment;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View w) {
+                // Create a dialog
                 AlertDialog.Builder note = new AlertDialog.Builder(MainActivity.this);
                 note.setTitle(getString(R.string.titleComment));
                 final EditText input = new EditText(MainActivity.this);
@@ -90,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     }
 
     private void configureViewPager() {
-        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
         // Display Vertical ViewPager with Happy Mood by default
+        VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
         verticalViewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
         verticalViewPager.setCurrentItem(3);
     }
@@ -101,37 +103,44 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         Date today = Calendar.getInstance().getTime();
         Mood dailyMood = prefs.getMood(today);
 
-        // Send the mood
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        switch (dailyMood) {
-            case Sad:
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sad));
-                break;
-            case Disappointed:
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.disappointed));
-                break;
-            case Normal:
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.normal));
-                break;
-            case Happy:
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.happy));
-                break;
-            case SuperHappy:
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.superHappy));
-                break;
+        // If no mood has been chosen, user can't send message and get an error message
+        if (dailyMood == null) {
+            Toast.makeText(getApplicationContext(), getString(R.string.errorMessage), Toast.LENGTH_SHORT).show();
+        } else {
+            // Send the mood
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            switch (dailyMood) {
+                case Sad:
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sad));
+                    break;
+                case Disappointed:
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.disappointed));
+                    break;
+                case Normal:
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.normal));
+                    break;
+                case Happy:
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.happy));
+                    break;
+                case SuperHappy:
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.superHappy));
+                    break;
+            }
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, Intent.EXTRA_TEXT));
         }
-        sendIntent.setType("text/plain");
-        startActivity(Intent.createChooser(sendIntent, Intent.EXTRA_TEXT));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Display an "app bar" or "action bar"
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Display "share" and how to respond when a user clicks on
         switch (item.getItemId()) {
             case R.id.action_share:
                 sendSMS();
@@ -143,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
     @Override
     public void OnSmileyClicked(View view) {
         Date today = Calendar.getInstance().getTime();
-
         // Create and personalize snackbar
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "", 750);
         View sbView = snackbar.getView();
