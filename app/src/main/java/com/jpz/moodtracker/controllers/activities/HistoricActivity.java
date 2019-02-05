@@ -65,7 +65,7 @@ public class HistoricActivity extends AppCompatActivity {
         // Loop to display moods and comments in the seven past days
         Calendar calendar = Calendar.getInstance();
         for (int i = 0; i < 7; i++) {
-            calendar.add(Calendar.MINUTE, -1);
+            calendar.add(Calendar.DAY_OF_WEEK, -1);
             this.displayMood(calendar.getTime(), layouts[i]);
             this.displayComment(calendar.getTime(), buttons[i]);
         }
