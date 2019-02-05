@@ -18,13 +18,13 @@ public class MySharedPreferences {
 
     // Get a key, which is a date, for comments
     private String getCommentKey(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         return "Comment_" + sdf.format(date);
     }
 
     // Get a key, which is a date, for moods
     private String getMoodKey(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy/HH/mm", Locale.FRANCE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         return "Mood_" + sdf.format(date);
     }
 
