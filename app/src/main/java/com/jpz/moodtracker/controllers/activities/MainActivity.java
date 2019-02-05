@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements MoodFragment.OnSm
         View sbView = snackbar.getView();
         TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setTextSize(20);
 
         // Save Mood and display a snackbar confirmation
         VerticalViewPager verticalViewPager = findViewById(R.id.activity_main_viewpager);
