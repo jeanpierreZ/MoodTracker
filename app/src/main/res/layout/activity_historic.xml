@@ -12,8 +12,7 @@
         android:id="@+id/activity_historic_day_seven"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_seven"
@@ -39,8 +38,7 @@
         android:id="@+id/activity_historic_day_six"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_six"
@@ -66,8 +64,7 @@
         android:id="@+id/activity_historic_day_five"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_five"
@@ -93,8 +90,7 @@
         android:id="@+id/activity_historic_day_four"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_four"
@@ -120,8 +116,7 @@
         android:id="@+id/activity_historic_day_three"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_three"
@@ -147,8 +142,7 @@
         android:id="@+id/activity_historic_day_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_two"
@@ -174,8 +168,7 @@
         android:id="@+id/activity_historic_day_one"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/activity_historic_text_one"
