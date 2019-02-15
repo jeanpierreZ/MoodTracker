@@ -13,7 +13,7 @@ public class MySharedPreferences {
 
     // Constructor
     public MySharedPreferences(Context context){
-        prefs = context.getSharedPreferences("TEST", MODE_PRIVATE);
+        prefs = context.getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
     // Get a key, which is a date, for comments
